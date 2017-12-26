@@ -10,4 +10,13 @@
         <item>Madison Square Garden</item>
         <item>Roosevelt Island</item>
     </string-array>
+    <string-array name="interests">
+        <item>Hospitals</item>
+        <item>Libraries</item>
+        <item>Museums</item>
+        <item>Casinos</item>
+        <item>Restaurants</item>
+        <item>Universities</item>
+        <item>Zoos</item>
+    </string-array>
 </resources>
