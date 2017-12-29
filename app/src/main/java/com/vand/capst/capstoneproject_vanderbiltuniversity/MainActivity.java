@@ -17,43 +17,27 @@ import android.os.Binder;
 
 public class MainActivity extends Activity {
 
+    private int request_number=0;
     private boolean mBound=false;
     private WebService ws;
-    Context ctx = this;
-    WebService service;
+    private Context ctx = this;
+    //private WebService service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.popular_points, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.interests, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner2.setAdapter(adapter2);
+        initializeViews();
 
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 if (mBound) {
-                    // Call a method from the LocalService.
-                    // However, if this call were something that might hang, then this request should
-                    // occur in a separate thread to avoid slowing down the activity performance.
-                    //int num = mService.getRandomNumber();
-                    ws.execute();
+                    //check request_number and act accordingly - total web service calls = 3.
+                    String requestUrl=null;
+                    ws.execute(requestUrl);
                     Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
                 // Code here executes on main thread after user presses button
@@ -61,6 +45,7 @@ public class MainActivity extends Activity {
         });
 
     }
+
 
     @Override
     protected void onStart(){
@@ -85,7 +70,7 @@ public class MainActivity extends Activity {
                                        IBinder b) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
             WebService.LocalBinder binder = (WebService.LocalBinder) b;
-            service = binder.getService();
+            ws = binder.getService();
             mBound = true;
         }
 
@@ -94,5 +79,26 @@ public class MainActivity extends Activity {
             mBound = false;
         }
     };
+
+    private void initializeViews(){
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.popular_points, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.interests, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner2.setAdapter(adapter2);
+    }
 
 }
