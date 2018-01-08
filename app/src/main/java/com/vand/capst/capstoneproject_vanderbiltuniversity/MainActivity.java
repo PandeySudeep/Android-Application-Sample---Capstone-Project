@@ -99,5 +99,4 @@ public class MainActivity extends Activity {
         // Apply the adapter to the spinner
         spinner2.setAdapter(adapter2);
     }
-
 }
