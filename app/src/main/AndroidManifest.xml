@@ -20,9 +20,12 @@
         <service
             android:name=".WebService"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"></service>
 
-        </service>
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="vand.capst.myprovider"
+            android:exported="false"></provider>
     </application>
 
 </manifest>

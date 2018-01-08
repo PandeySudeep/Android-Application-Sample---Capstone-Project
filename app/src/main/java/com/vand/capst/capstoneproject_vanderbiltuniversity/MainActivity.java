@@ -43,7 +43,6 @@ public class MainActivity extends Activity {
                 // Code here executes on main thread after user presses button
             }
         });
-
     }
 
 
