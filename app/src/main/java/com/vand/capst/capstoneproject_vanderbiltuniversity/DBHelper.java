@@ -41,6 +41,9 @@ extends SQLiteOpenHelper
                         + LocationContract.LocationEntry.COLUMN_INFO2 + " TEXT NOT NULL "
                         + " );";
 
+        final String Drop_Table =
+                "DROP TABLE IF EXISTS "
+                        + LocationContract.LocationEntry.TABLE_NAME;
         /**
          * Constructor - initialize database name and version, but don't
          * actually construct the database (which is done in the
@@ -64,7 +67,9 @@ extends SQLiteOpenHelper
          */
         @Override
         public void onCreate(SQLiteDatabase db) {
-        // Create the table.
+            //Drop table.
+            db.execSQL(Drop_Table);
+            // Create the table.
         db.execSQL(SQL_CREATE_HOBBIT_TABLE);
 
     }

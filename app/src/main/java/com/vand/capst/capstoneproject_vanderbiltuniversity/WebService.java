@@ -102,6 +102,7 @@ public class WebService extends Service {
                         }
 
                         // Insert the array of content at the designated URI.
+                        //Should this be AsyncTask?
                         cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
                                 cvsArray);
 
