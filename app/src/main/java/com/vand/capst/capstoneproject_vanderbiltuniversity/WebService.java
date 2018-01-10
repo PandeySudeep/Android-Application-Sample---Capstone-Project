@@ -30,17 +30,18 @@ public class WebService extends Service {
     private ServiceHandler mServiceHandler;
     private RequestQueue mRequestQueue;
     private final IBinder binder = new LocalBinder();
-    private ContentResolver cr;
     private MainActivity activity;
+    private ContentResolver cr = activity.getContentResolver();
+
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
         }
     }
-    public WebService(MainActivity mainActivity) {
-        this.activity=mainActivity;
-        cr=activity.getContentResolver();
+    public WebService() {
+        //this.activity=mainActivity;
+        //cr=activity.getContentResolver();
     }
 
     @Override
@@ -105,6 +106,7 @@ public class WebService extends Service {
                         //Should this be AsyncTask?
                         cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
                                 cvsArray);
+                        sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
 
 
                     }

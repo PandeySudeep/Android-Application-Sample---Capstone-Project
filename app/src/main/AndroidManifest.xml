@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vand.capst.capstoneproject_vanderbiltuniversity">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,12 +22,22 @@
         <service
             android:name=".WebService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <provider
             android:name=".MyContentProvider"
             android:authorities="vand.capst.myprovider"
-            android:exported="false"></provider>
+            android:exported="false" />
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="capstone.project.action.PERSIST_COMPLETE"></action>
+            </intent-filter>
+
+        </receiver>
     </application>
 
 </manifest>
