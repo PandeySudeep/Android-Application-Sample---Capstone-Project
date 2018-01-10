@@ -55,7 +55,8 @@ public class MainActivity extends Activity {
 
                 final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);//preExecute()
                 //update the button text as 'processing...' and disable the button
-                //AsynTask to retrieve cursor from database. doInBackground()[AsyncTask]
+                //AsyncTask to retrieve cursor from database. doInBackground()[AsyncTask]
+
                 //postExecute() [AsyncTask]
 
                 Webresponse[] param=null;//placeholder to be replaced with array containing all webresponse objects

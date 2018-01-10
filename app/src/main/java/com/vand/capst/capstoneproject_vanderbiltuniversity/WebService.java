@@ -101,7 +101,7 @@ public class WebService extends Service {
                                     placetype);
                             cvsArray[i++] = cvs;
                         }
-
+                        //AsyncTask's doInBackground() to truncate the table.
                         // Insert the array of content at the designated URI.
                         //Should this be AsyncTask?
                         cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
