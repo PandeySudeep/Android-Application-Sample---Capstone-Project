@@ -46,29 +46,26 @@ public class MainActivity extends Activity {
             }
         });
 
+
+
         final Button resultButton = findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener() {
+        resultButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
 
-                final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);//preExecute()
+                //preExecute()
                 //update the button text as 'processing...' and disable the button
                 //AsyncTask to retrieve cursor from database. doInBackground()[AsyncTask]
 
                 //postExecute() [AsyncTask]
 
-                Webresponse[] param=null;//placeholder to be replaced with array containing all webresponse objects
-                CapstoneAdapter adapter = new CapstoneAdapter(param);
-
-                recyclerView.setAdapter(adapter);
-                //return recyclerView;
-
-                StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(manager);
+                //create Webresponse[] with Webresponse objects.
+                //create intent holding Webresponse[]..
                 //enable the button
-                //startActivity() to RecyclerView
+                //startActivity() -> ResultView
             }
         });
+
     }
 
 
