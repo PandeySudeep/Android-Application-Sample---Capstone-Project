@@ -52,17 +52,14 @@ public class MainActivity extends Activity {
         resultButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
                 //preExecute()
                 //update the button text as 'processing...' and disable the button
                 //AsyncTask to retrieve cursor from database. doInBackground()[AsyncTask]
 
+                //create Webresponse[] with Webresponse objects. ->doInBackground()
                 //postExecute() [AsyncTask]
-
-                //create Webresponse[] with Webresponse objects.
                 //create intent holding Webresponse[]..
-                //enable the button
-                //startActivity() -> ResultView
+                //startActivity(intent) -> ResultView
             }
         });
 

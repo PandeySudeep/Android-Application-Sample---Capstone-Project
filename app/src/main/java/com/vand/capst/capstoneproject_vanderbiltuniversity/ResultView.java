@@ -12,17 +12,13 @@ public class ResultView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_view);
 
+        //get Webresponse[] from intent.
         final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);//preExecute()
-        //update the button text as 'processing...' and disable the button
-        //AsyncTask to retrieve cursor from database. doInBackground()[AsyncTask]
 
-        //postExecute() [AsyncTask]
-
-        Webresponse[] param=null;//placeholder to be replaced with array containing all webresponse objects
+        Webresponse[] param=null;//placeholder
         CapstoneAdapter adapter = new CapstoneAdapter(param);
 
         recyclerView.setAdapter(adapter);
-        //return recyclerView;
 
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
