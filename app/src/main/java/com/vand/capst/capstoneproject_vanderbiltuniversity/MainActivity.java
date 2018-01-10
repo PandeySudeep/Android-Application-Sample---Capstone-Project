@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,7 +51,20 @@ public class MainActivity extends Activity {
         final Button resultButton = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //AsynTask to retrieve cursor from database.
+
+
+
+                final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);//preExecute()
+                //AsynTask to retrieve cursor from database. doInBackground()[AsyncTask]
+                //postExecute() [AsyncTask]
+                Webresponse[] param=null;//placeholder
+                CapstoneAdapter adapter = new CapstoneAdapter(param);
+
+                recyclerView.setAdapter(adapter);
+                //return recyclerView;
+
+                StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(manager);
                 //startActivity() to RecyclerView
             }
         });
