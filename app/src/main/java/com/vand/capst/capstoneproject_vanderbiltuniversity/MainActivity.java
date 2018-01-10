@@ -45,6 +45,14 @@ public class MainActivity extends Activity {
                 // Code here executes on main thread after user presses button
             }
         });
+
+        final Button resultButton = findViewById(R.id.button2);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //AsynTask to retrieve cursor from database.
+                //startActivity() to RecyclerView
+            }
+        });
     }
 
 
