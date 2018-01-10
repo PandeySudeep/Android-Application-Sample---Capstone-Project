@@ -20,12 +20,12 @@ import android.os.Binder;
 
 public class MainActivity extends Activity {
 
-    private int request_number=0;
+    //private int request_number=0;
     private boolean mBound=false;
     private WebService ws;
     private Context ctx = this;
     //private WebService service;
-    protected ContentResolver resolver = getContentResolver();
+    //protected ContentResolver resolver = getContentResolver();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +38,13 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 if (mBound) {
-                    //check request_number and act accordingly - total web service calls = 3.
+                    //Get user selection and devise request URL.
                     String requestUrl=null;
-                    String userselection="placeholder";
-                    ws.execute(requestUrl,userselection);
-                    Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
+                    String placetype="placeholder";
+                    ws.execute(requestUrl,placetype);
+                    //Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
-                // Code here executes on main thread after user presses button
+
             }
         });
 
@@ -53,11 +53,12 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
 
-
                 final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);//preExecute()
+                //update the button text as 'processing...' and disable the button
                 //AsynTask to retrieve cursor from database. doInBackground()[AsyncTask]
                 //postExecute() [AsyncTask]
-                Webresponse[] param=null;//placeholder
+
+                Webresponse[] param=null;//placeholder to be replaced with array containing all webresponse objects
                 CapstoneAdapter adapter = new CapstoneAdapter(param);
 
                 recyclerView.setAdapter(adapter);
@@ -65,6 +66,7 @@ public class MainActivity extends Activity {
 
                 StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(manager);
+                //enable the button
                 //startActivity() to RecyclerView
             }
         });

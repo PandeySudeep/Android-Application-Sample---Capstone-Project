@@ -7,7 +7,7 @@ package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 public class Webresponse {
 
-    private String response;
+    private String name;
 
   /*
     public static final Webresponse[] responsesFromWeb = {
@@ -20,11 +20,11 @@ public class Webresponse {
     };
     */
 
-    private Webresponse(String webresp){
-        this.response=webresp;
+    private Webresponse(String _name){
+        this.name=_name;
     }
 
-    public String getResponse(){
-        return response;
+    public String getName(){
+        return name;
     }
 }
