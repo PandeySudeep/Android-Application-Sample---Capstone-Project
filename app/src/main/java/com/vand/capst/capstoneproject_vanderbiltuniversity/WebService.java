@@ -1,6 +1,8 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.app.Service;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
@@ -28,13 +30,18 @@ public class WebService extends Service {
     private ServiceHandler mServiceHandler;
     private RequestQueue mRequestQueue;
     private final IBinder binder = new LocalBinder();
+    private ContentResolver cr;
+    private MainActivity activity;
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
         }
     }
-    public WebService() {}
+    public WebService(MainActivity mainActivity) {
+        this.activity=mainActivity;
+        cr=activity.getContentResolver();
+    }
 
     @Override
     public void onCreate(){
@@ -61,7 +68,7 @@ public class WebService extends Service {
         }
     }
 
-    public void execute(final String URL){
+    public void execute(final String URL, final String placetype){
         mServiceHandler.post(new Runnable(){
            public void run() {
 
@@ -75,6 +82,30 @@ public class WebService extends Service {
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,new Response.Listener<JSONObject>(){
                     public void onResponse(JSONObject response){
                      //handle response on UI thread..
+                        //get 'name' of the place from json object and create array of strings..
+                        String[] placenames = null; //null for timebeing
+                    //bulk insert using content provider
+                        ContentValues[] cvsArray =
+                                new ContentValues[placenames.length];
+
+                        // Index counter.
+                        int i = 0;
+
+                        // Insert all the characters into the ContentValues array.
+                        for (String name : placenames) {
+                            ContentValues cvs = new ContentValues();
+                            cvs.put(LocationContract.LocationEntry.COLUMN_INFO1,
+                                    name);
+                            cvs.put(LocationContract.LocationEntry.COLUMN_INFO2,
+                                    placetype);
+                            cvsArray[i++] = cvs;
+                        }
+
+                        // Insert the array of content at the designated URI.
+                        cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
+                                cvsArray);
+
+
                     }
                 },new Response.ErrorListener(){
                     public void onErrorResponse(VolleyError error){
@@ -89,6 +120,7 @@ public class WebService extends Service {
                 UI_Handler.post(new Runnable(){
                    public void run(){
                        ////send data back to UI thread with information whether another request can be made for additional data.
+
                    }
                 });
            }

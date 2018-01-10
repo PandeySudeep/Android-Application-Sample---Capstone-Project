@@ -2,6 +2,7 @@ package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
     private WebService ws;
     private Context ctx = this;
     //private WebService service;
-
+    protected ContentResolver resolver = getContentResolver();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,8 @@ public class MainActivity extends Activity {
                 if (mBound) {
                     //check request_number and act accordingly - total web service calls = 3.
                     String requestUrl=null;
-                    ws.execute(requestUrl);
+                    String userselection="placeholder";
+                    ws.execute(requestUrl,userselection);
                     Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
                 // Code here executes on main thread after user presses button

@@ -66,6 +66,7 @@ extends SQLiteOpenHelper
         public void onCreate(SQLiteDatabase db) {
         // Create the table.
         db.execSQL(SQL_CREATE_HOBBIT_TABLE);
+
     }
 
         /**
