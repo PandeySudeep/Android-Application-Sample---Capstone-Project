@@ -14,22 +14,10 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        // an Intent broadcast.
-        //throw new UnsupportedOperationException("Not yet implemented");
 
-        //manipulate UI by enabling 'View Results' button
+        //manipulate UI by turning on the visibility of 'View Results' button as well as the preceding textView.
         //goAsync()
 
     }
 
-    /**
-     * Factory method that returns an implicit intent that
-     * launches the DownloadReceiver.
-     *
-     **/
-    public static Intent makePersistCompleteIntent() {
-        // Create an implicit intent that launches the DownloadReceiver.
-        return new Intent(MyReceiver.ACTION_PERSIST_COMPLETE);
-                //.putExtra("URI", pathToImageFile.toString());
-    }
 }
