@@ -75,7 +75,7 @@ class CapstoneAdapter extends RecyclerView.Adapter<CapstoneAdapter.ViewHolder> {
 
         final CardView cardView = holder.cardView;
         TextView textView = (TextView)cardView.findViewById(R.id.web_response);
-        textView.setText(responses[position].getResponse());
+        textView.setText(responses[position].getName());
         /*cardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

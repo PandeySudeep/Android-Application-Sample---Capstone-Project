@@ -30,7 +30,7 @@ public class WebService extends Service {
     private ServiceHandler mServiceHandler;
     private RequestQueue mRequestQueue;
     private final IBinder binder = new LocalBinder();
-    private MainActivity activity;
+    private MainActivity activity = new MainActivity();
     private ContentResolver cr = activity.getContentResolver();
 
 
@@ -39,10 +39,7 @@ public class WebService extends Service {
             super(looper);
         }
     }
-    public WebService() {
-        //this.activity=mainActivity;
-        //cr=activity.getContentResolver();
-    }
+    public WebService() {}
 
     @Override
     public void onCreate(){
@@ -59,7 +56,7 @@ public class WebService extends Service {
     public IBinder onBind(Intent intent) {
 
         return binder;
-        //throw new UnsupportedOperationException("Not yet implemented");
+
     }
 
     public class LocalBinder extends Binder {
@@ -73,8 +70,7 @@ public class WebService extends Service {
         mServiceHandler.post(new Runnable(){
            public void run() {
 
-               //TODO - get request parameters from the intent and send GET request. Use content provider to insert into SQLlite.
-                //RequestQueue mRequestQueue;
+
                 Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
                 Network network = new BasicNetwork(new HurlStack());
                 mRequestQueue=new RequestQueue(cache,network);
@@ -102,8 +98,8 @@ public class WebService extends Service {
                             cvsArray[i++] = cvs;
                         }
                         //AsyncTask's doInBackground() to truncate the table.
-                        // Insert the array of content at the designated URI.
-                        //Should this be AsyncTask?
+                        // Insert the array of content at the designated URI.postExecute() of AsyncTask
+
                         cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
                                 cvsArray);
                         sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
@@ -119,13 +115,13 @@ public class WebService extends Service {
                 jsonObjectRequest.setTag("MyTag");
                 mRequestQueue.add(jsonObjectRequest);
 
-                Handler UI_Handler = new Handler(Looper.getMainLooper());
-                UI_Handler.post(new Runnable(){
-                   public void run(){
-                       ////send data back to UI thread with information whether another request can be made for additional data.
+                //Handler UI_Handler = new Handler(Looper.getMainLooper());
+                //UI_Handler.post(new Runnable(){
+                  // public void run(){
 
-                   }
-                });
+
+                   //}
+                //});
            }
         });
     }
