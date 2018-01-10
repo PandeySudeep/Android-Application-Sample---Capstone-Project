@@ -14,7 +14,6 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
         //manipulate UI by turning on the visibility of 'View Results' button as well as the preceding textView.
         //goAsync()
 

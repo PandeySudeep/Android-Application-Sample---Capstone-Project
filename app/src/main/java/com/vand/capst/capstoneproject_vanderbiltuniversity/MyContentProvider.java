@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
-//import android.support.annotation.NonNull;
 
 public class MyContentProvider extends ContentProvider {
 
@@ -19,7 +18,7 @@ public class MyContentProvider extends ContentProvider {
             MyContentProvider.class.getSimpleName();
 
     /**
-     * Use HobbitDatabaseHelper to manage database creation and version
+     * Use DBHelper to manage database creation and version
      * management.
      */
     private DBHelper persistHelper;
@@ -34,13 +33,9 @@ public class MyContentProvider extends ContentProvider {
 
         mContext = getContext();
 
-        // Select the concrete implementor.
-        // Create the HobbitDatabaseHelper.
         persistHelper =
                 new DBHelper(mContext);
         return true;
-        // TODO: Implement this to initialize your content provider on startup.
-        //return false;
     }
 
     /**
