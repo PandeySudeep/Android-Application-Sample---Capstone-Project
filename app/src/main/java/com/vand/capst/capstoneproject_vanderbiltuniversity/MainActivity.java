@@ -20,12 +20,10 @@ import android.os.Binder;
 
 public class MainActivity extends Activity {
 
-    //private int request_number=0;
     private boolean mBound=false;
     private WebService ws;
     private Context ctx = this;
-    //private WebService service;
-    //protected ContentResolver resolver = getContentResolver();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
