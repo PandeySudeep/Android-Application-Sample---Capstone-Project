@@ -34,10 +34,11 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="capstone.project.action.PERSIST_COMPLETE"></action>
+                <action android:name="capstone.project.action.PERSIST_COMPLETE" />
             </intent-filter>
-
         </receiver>
+
+        <activity android:name=".ResultView"></activity>
     </application>
 
 </manifest>
