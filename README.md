@@ -6,3 +6,5 @@ select a point of interest like restaurant, library etc.
 Application then displays numerous points of interest around the
 site.
 
+###About the Web Service
+
