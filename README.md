@@ -14,3 +14,10 @@ Places API Web Service to locate specific institutions around the site.
 
 Application uses Nearby Search Requests available with [Google Places API Web
 Service](https://developers.google.com/places/web-service/search).
+
+Nearby Search Request takes the form 
+<span style="color: red">**maps.googleapis.com/maps/api/place/nearbysearch/output?parameters**</span>
+where required parameters are (i) key (application key), (ii) location (latitude/
+longitude around which to retrieve information), (iii) radius (the distance (in meters) 
+within which to return place results.)
+
