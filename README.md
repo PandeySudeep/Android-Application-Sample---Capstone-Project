@@ -8,7 +8,7 @@ Places API Web Service to locate specific institutions around the site.
 
 ### Wireframe
 
-![alt text](images/y.jpg "Logo Title Text 1")
+![alt text](images/wf1.png "Logo Title Text 1")
 
 ### About the Web Service
 
@@ -20,4 +20,6 @@ Nearby Search Request takes the form
 where required parameters are (i) key (application key), (ii) location (latitude/
 longitude around which to retrieve information), (iii) radius (the distance (in meters) 
 within which to return place results.)
+
+
 
