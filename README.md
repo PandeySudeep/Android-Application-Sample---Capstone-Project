@@ -9,6 +9,7 @@ Places API Web Service to locate specific institutions around the site.
 ### Wireframe
 
 ![alt text](images/wf1.PNG "Wireframe 1")
+![alt text](images/wf2.PNG "Wireframe 2")
 
 ### About the Web Service
 
