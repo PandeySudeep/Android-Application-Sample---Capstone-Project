@@ -22,5 +22,7 @@ where required parameters are (i) key (application key), (ii) location (latitude
 longitude around which to retrieve information), (iii) radius (the distance (in meters) 
 within which to return place results.)
 
+### Application Structure
 
+![alt text](images/uml.PNG "Wireframe 1")
 
