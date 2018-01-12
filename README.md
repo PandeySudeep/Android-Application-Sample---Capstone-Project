@@ -26,3 +26,13 @@ within which to return place results.)
 
 ![alt text](images/uml.PNG "Wireframe 1")
 
+### Structure Details
+
+***MainActivity.java*** is the application launcher. It provides UI to allow user
+enter inputs and a button to trigger web service call. ***MyContentProvider.java***,
+ ***LocationContract.java***, ***DBHelper.java*** together provide content provider
+implementation. ***ResultView.java*** is the second activity that displays
+RecyclerView consisting of results retrieved via web service. ***CapstoneAdapter.java***
+is recyclerview specific adapter. ***WebService.java*** is a bound service that
+MainActivity binds to for web service call. ***Webresponse.java*** is a POJO for
+holding result data.
