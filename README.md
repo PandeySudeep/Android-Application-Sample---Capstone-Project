@@ -35,6 +35,6 @@ implementation. ***ResultView.java*** is the second activity that displays
 RecyclerView consisting of results retrieved via web service. ***CapstoneAdapter.java***
 is recyclerview specific adapter. ***WebService.java*** is a bound service that
 MainActivity binds to for web service call. It uses ***ServiceHandler*** and ***Looper*** 
- run it's logic in a separate handler thread. ***Webresponse.java*** is a POJO for
+ to run it's logic in a separate handler thread. ***Webresponse.java*** is a POJO for
 holding result data. ***MyReceiver.java*** is a broadcast receiver that responds
  to broadcast sent after successful web service call.
