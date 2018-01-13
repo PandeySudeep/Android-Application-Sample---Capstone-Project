@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     private boolean mBound=false;
     private WebService ws;
     private Context ctx = this;
-
+    //private String requestUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +37,15 @@ public class MainActivity extends Activity {
 
                 if (mBound) {
                     //Get user selection and devise request URL.
-                    String requestUrl=null;
-                    String placetype="placeholder";
-                    ws.execute(requestUrl,placetype);
+                    //String requestUrl=null;
+                    //String placetype="placeholder";
+                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=YOUR_API_KEY";
+                    ws.execute(requestUrl,getInterest());
                     //Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-
-
 
         final Button resultButton = findViewById(R.id.button2);
         resultButton.setOnClickListener(new View.OnClickListener() {
@@ -118,5 +117,34 @@ public class MainActivity extends Activity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner2.setAdapter(adapter2);
+    }
+
+    private String getSite(){
+
+        Spinner mySpinner=(Spinner) findViewById(R.id.spinner);
+        String text = mySpinner.getSelectedItem().toString();
+        return text;
+    }
+    private String getInterest(){
+
+        Spinner mySpinner=(Spinner) findViewById(R.id.spinner2);
+        String text = mySpinner.getSelectedItem().toString();
+        return text;
+    }
+    private double getLatitude(){
+
+        if (getSite()=="Statue of Liberty"){
+            return -33.8670522;
+        }else{
+            return 0.0;
+        }
+    }
+    private double getLongitude(){
+
+        if(getSite()=="Statue of Liberty"){
+            return 151.1957362;
+        }else{
+            return 0.0;
+        }
     }
 }
