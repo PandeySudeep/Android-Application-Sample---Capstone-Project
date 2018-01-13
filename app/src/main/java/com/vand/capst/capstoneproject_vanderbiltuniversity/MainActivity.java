@@ -41,6 +41,8 @@ public class MainActivity extends Activity {
                     //String placetype="placeholder";
                     String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=YOUR_API_KEY";
                     ws.execute(requestUrl,getInterest());
+                    button.setEnabled(false);
+                    button.setText("processing");
                     //Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
 
@@ -117,6 +119,7 @@ public class MainActivity extends Activity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner2.setAdapter(adapter2);
+        findViewById(R.id.button2).setEnabled(false);
     }
 
     private String getSite(){
