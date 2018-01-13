@@ -79,7 +79,7 @@ public class WebService extends Service {
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,new Response.Listener<JSONObject>(){
                     public void onResponse(JSONObject response){
                      //handle response on UI thread..
-                        //get 'name' of the place from json object and create array of strings..
+                        // get 'name' of the place from json object and create array of strings..
                         String[] placenames = null; //null for timebeing
                     //bulk insert using content provider
                         ContentValues[] cvsArray =
