@@ -72,7 +72,7 @@ public class LocationContract {
          * Name of the database table.
          */
         public static final String TABLE_NAME =
-                "character_table";
+                "location_table";
 
         /**
          * Columns to store data.

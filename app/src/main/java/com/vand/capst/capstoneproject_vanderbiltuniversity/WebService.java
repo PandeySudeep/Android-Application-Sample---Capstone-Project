@@ -42,7 +42,7 @@ public class WebService extends Service {
     //private MainActivity activity = new MainActivity();
     //private ContentResolver cr = activity.getContentResolver();
 
-    ContentResolver cr = this.getApplicationContext().getContentResolver();
+    //ContentResolver cr = WebService.this.getContentResolver();
     ContentValues[] cvsArray;
 
     private final class ServiceHandler extends Handler {
@@ -169,7 +169,7 @@ public class WebService extends Service {
             SQLiteDatabase db = new DBHelper(getBaseContext()).getWritableDatabase();
             db.execSQL("DELETE from "+LocationContract.LocationEntry.TABLE_NAME);
             db.close();
-            cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
+            getBaseContext().getContentResolver().bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
             return null;
 
         }
