@@ -1,10 +1,12 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -28,7 +30,7 @@ public class MainActivity extends Activity {
 
     //public static Context context = this.getContext();
     //public Context context = this;
-
+    private BroadcastReceiver mReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,34 @@ public class MainActivity extends Activity {
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter(
+                "capstone.project.action.PERSIST_COMPLETE");
+
+        mReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //extract our message from intent
+                //String msg_for_me = intent.getStringExtra("some_msg");
+                //log our message value
+                //Log.i("InchooTutorial", msg_for_me);
+                Button mybutton = findViewById(R.id.button2);
+                mybutton.setEnabled(true);
+
+            }
+        };
+        //registering our receiver
+        this.registerReceiver(mReceiver, intentFilter);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        this.unregisterReceiver(this.mReceiver);
+    }
     @Override
     protected void onStop() {
         super.onStop();
