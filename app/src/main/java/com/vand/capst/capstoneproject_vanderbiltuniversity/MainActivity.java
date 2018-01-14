@@ -23,7 +23,11 @@ public class MainActivity extends Activity {
     private boolean mBound=false;
     private WebService ws;
     private Context ctx = this;
+    //public ContentResolver cr = this.getContentResolver();
     //private String requestUrl;
+
+    //public static Context context = this.getContext();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

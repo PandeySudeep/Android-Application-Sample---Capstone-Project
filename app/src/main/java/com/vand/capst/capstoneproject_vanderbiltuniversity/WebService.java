@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -36,9 +37,11 @@ public class WebService extends Service {
     private ServiceHandler mServiceHandler;
     private RequestQueue mRequestQueue;
     private final IBinder binder = new LocalBinder();
-    private MainActivity activity = new MainActivity();
-    private ContentResolver cr = activity.getContentResolver();
+    //private MainActivity activity = new MainActivity();
+    //private ContentResolver cr = activity.getContentResolver();
 
+    ContentResolver cr = this.getApplicationContext().getContentResolver();
+    ContentValues[] cvsArray;
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
@@ -103,10 +106,9 @@ public class WebService extends Service {
                             }
 
                         }
-                        // get 'name' of the place from json object and create array of strings..
-                        //String[] place_names = null; //null for timebeing
+
                     //bulk insert using content provider
-                        ContentValues[] cvsArray =
+                        cvsArray =
                                 new ContentValues[placenames.size()];
 
                         // Index counter.
@@ -124,9 +126,10 @@ public class WebService extends Service {
                         //AsyncTask's doInBackground() to truncate the table.
                         // Insert the array of content at the designated URI.postExecute() of AsyncTask
 
-                        cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
-                                cvsArray);
-                        sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
+                        new TruncateTask().execute();
+                        //cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
+                          //      cvsArray);
+                        //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
 
 
                     }
@@ -153,6 +156,20 @@ public class WebService extends Service {
         //cancel pending web service request..
         if(mRequestQueue != null){
             mRequestQueue.cancelAll("MyTag");
+        }
+    }
+
+    private class TruncateTask extends AsyncTask<Void,Void,Void> {
+
+
+        protected Void doInBackground(Void... params){
+
+            cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
+            return null;
+
+        }
+        protected void onPostExecute(){
+            sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
         }
     }
 }
