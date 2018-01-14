@@ -4,7 +4,7 @@ public class Webresponse {
 
     private String placeName;
 
-    private Webresponse(String _name){
+    public Webresponse(String _name){
         this.placeName=_name;
     }
 

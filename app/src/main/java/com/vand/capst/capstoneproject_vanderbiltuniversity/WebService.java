@@ -166,10 +166,10 @@ public class WebService extends Service {
 
         protected Void doInBackground(Void... params){
 
-            SQLiteDatabase db = new DBHelper(getBaseContext()).getWritableDatabase();
+            SQLiteDatabase db = new DBHelper(WebService.this).getWritableDatabase();
             db.execSQL("DELETE from "+LocationContract.LocationEntry.TABLE_NAME);
             db.close();
-            getBaseContext().getContentResolver().bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
+            WebService.this.getContentResolver().bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
             return null;
 
         }

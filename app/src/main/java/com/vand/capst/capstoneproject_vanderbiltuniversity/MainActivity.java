@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +21,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.os.Binder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -31,6 +38,7 @@ public class MainActivity extends Activity {
     //public static Context context = this.getContext();
     //public Context context = this;
     private BroadcastReceiver mReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,6 +191,37 @@ public class MainActivity extends Activity {
             return 151.1957362;
         }else{
             return 0.0;
+        }
+    }
+
+    private class GetWebResponses extends AsyncTask<Void,Void,List<String>>{
+
+        //Webresponse[] googleServiceResponses=null;
+
+        protected void preExecute(){
+
+            Button viewButton = findViewById(R.id.button2);
+            viewButton.setEnabled(false);
+        }
+        protected List<String> doInBackground(Void...params){
+            List<String> collect = new ArrayList<String>();
+            SQLiteDatabase dbase = new DBHelper(MainActivity.this).getReadableDatabase();
+            Cursor resultSet = dbase.rawQuery("Select place_name from location_table",null);
+            while(resultSet.moveToNext()){
+
+                collect.add(resultSet.getString(0));
+
+            }
+            dbase.close();
+           // return Arrays.asList(collect);
+            //String[] googleServiceResponses = new Webresponse[collect.size()];
+            return collect;
+        }
+        protected void postExecute(List<String> responseStrings){
+            String[] responseArray = new String[responseStrings.size()];
+            Intent intent = new Intent(MainActivity.this,ResultView.class);
+            intent.putExtra("responseArray",responseArray);
+            startActivity(intent);
         }
     }
 }
