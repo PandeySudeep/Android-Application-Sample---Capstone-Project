@@ -22,7 +22,13 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.ArrayList;
 
 public class WebService extends Service {
 
@@ -79,11 +85,29 @@ public class WebService extends Service {
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,new Response.Listener<JSONObject>(){
                     public void onResponse(JSONObject response){
                      //handle response on UI thread..
+                        List<String> placenames = new ArrayList<String>();
+                        JSONArray resultArray=null;
+                        try {
+                            resultArray = response.getJSONArray("results");
+                        } catch (JSONException e) {
+                            //e.printStackTrace();
+                        }
+                        for(int i=0;i<resultArray.length();i++){
+                            JSONObject obj=null;
+                            try {
+                                obj = resultArray.getJSONObject(i);
+                                String name = obj.getString("name");
+                                placenames.add(name);
+                            } catch (JSONException e) {
+                                //e.printStackTrace();
+                            }
+
+                        }
                         // get 'name' of the place from json object and create array of strings..
-                        String[] placenames = null; //null for timebeing
+                        //String[] place_names = null; //null for timebeing
                     //bulk insert using content provider
                         ContentValues[] cvsArray =
-                                new ContentValues[placenames.length];
+                                new ContentValues[placenames.size()];
 
                         // Index counter.
                         int i = 0;
