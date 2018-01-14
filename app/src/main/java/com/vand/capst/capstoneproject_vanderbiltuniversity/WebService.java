@@ -4,6 +4,8 @@ import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabaseLockedException;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -164,6 +166,9 @@ public class WebService extends Service {
 
         protected Void doInBackground(Void... params){
 
+            SQLiteDatabase db = new DBHelper(getBaseContext()).getWritableDatabase();
+            db.execSQL("DELETE from "+LocationContract.LocationEntry.TABLE_NAME);
+            db.close();
             cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
             return null;
 

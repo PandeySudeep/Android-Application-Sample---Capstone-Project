@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     //private String requestUrl;
 
     //public static Context context = this.getContext();
+    //public Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
