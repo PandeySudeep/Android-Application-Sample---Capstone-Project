@@ -174,7 +174,10 @@ public class WebService extends Service {
 
         }
         protected void onPostExecute(){
-            sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
+            Intent intent = new Intent();
+            intent.setAction("capstone.project.action.PERSIST_COMPLETE");
+            sendBroadcast(intent);
+            //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
         }
     }
 }
