@@ -13,7 +13,7 @@ public class ResultView extends Activity {
         setContentView(R.layout.activity_result_view);
 
         //get Webresponse[] from intent.
-        final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);//preExecute()
+        final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
 
         Webresponse[] param=null;//placeholder
         CapstoneAdapter adapter = new CapstoneAdapter(param);
