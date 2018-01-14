@@ -47,9 +47,10 @@ public class MainActivity extends Activity {
                     //String requestUrl=null;
                     //String placetype="placeholder";
                     String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=YOUR_API_KEY";
-                    ws.execute(requestUrl,getInterest());
                     button.setEnabled(false);
                     button.setText("processing");
+                    ws.execute(requestUrl,getInterest());
+
                     //Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
 
