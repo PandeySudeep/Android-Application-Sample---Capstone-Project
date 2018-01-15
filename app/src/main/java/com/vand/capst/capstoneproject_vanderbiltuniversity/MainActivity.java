@@ -47,7 +47,8 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 if (mBound) {
-                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=YOUR_API_KEY";
+
+                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
                     button.setEnabled(false);
                     button.setText("processing");
                     ws.execute(requestUrl,getInterest());
