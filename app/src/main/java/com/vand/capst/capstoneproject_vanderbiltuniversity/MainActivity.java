@@ -184,21 +184,21 @@ public class MainActivity extends Activity {
         if (getSite()=="Statue of Liberty"){
             return 40.689249;
         }else if (getSite()=="Empire State"){
-            return 0.0;
+            return 40.748817;
         }else if(getSite()=="Brooklyn Bridge"){
-            return 0.0;
+            return 40.757715;
         }else if(getSite()=="Times Square"){
-            return 0.0;
+            return 40.758896;
         }
         else if(getSite()=="Rockefeller Center"){
-            return 0.0;
+            return 40.75874;
         }else if(getSite()=="World Trade Center"){
-            return 0.0;
+            return 40.711801;
         }else if(getSite()=="Madison Square Garden"){
-            return 0.0;
+            return 40.750298;
         }
         else if(getSite()=="Roosevelt Island"){
-            return 0.0;
+            return 38.895073;
         }
         return latitude;
     }
@@ -208,19 +208,19 @@ public class MainActivity extends Activity {
         if(getSite()=="Statue of Liberty"){
             return -74.044500;
         }else if(getSite()=="Empire State"){
-            return 0.0;
+            return -73.985428;
         }else if(getSite()=="Brooklyn Bridge"){
-            return 0.0;
+            return -73.98152829999998;
         }else if(getSite()=="Times Square"){
-            return 0.0;
+            return  -73.985130;
         }else if(getSite()=="Rockefeller Center"){
-
+            return -73.978674;
         }else if(getSite()=="World Trade Center"){
-            return 0.0;
+            return -74.013120;
         }else if(getSite()=="Madison Square Garden"){
-            return 0.0;
+            return  -73.993324;
         }else if(getSite()=="Roosevelt Island"){
-            return 0.0;
+            return -77.061859;
         }
         return longitude;
     }
