@@ -32,11 +32,7 @@ public class MainActivity extends Activity {
     private boolean mBound=false;
     private WebService ws;
     private Context ctx = this;
-    //public ContentResolver cr = this.getContentResolver();
-    //private String requestUrl;
 
-    //public static Context context = this.getContext();
-    //public Context context = this;
     private BroadcastReceiver mReceiver;
 
     @Override
@@ -51,9 +47,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 if (mBound) {
-                    //Get user selection and devise request URL.
-                    //String requestUrl=null;
-                    //String placetype="placeholder";
                     String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=YOUR_API_KEY";
                     button.setEnabled(false);
                     button.setText("processing");
@@ -102,10 +95,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                //extract our message from intent
-                //String msg_for_me = intent.getStringExtra("some_msg");
-                //log our message value
-                //Log.i("InchooTutorial", msg_for_me);
+
                 Button mybutton = findViewById(R.id.button2);
                 mybutton.setEnabled(true);
 
