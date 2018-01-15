@@ -105,6 +105,7 @@ public class MyContentProvider extends ContentProvider {
     /**
      * Method called to handle insert requests from client apps.
      */
+
     @Override
     public Uri insert(Uri uri,
                       ContentValues cvs) {
@@ -215,6 +216,7 @@ public class MyContentProvider extends ContentProvider {
         } finally {
             // End a transaction.
             db.endTransaction();
+            db.close();
         }
         return returnCount;
     }
