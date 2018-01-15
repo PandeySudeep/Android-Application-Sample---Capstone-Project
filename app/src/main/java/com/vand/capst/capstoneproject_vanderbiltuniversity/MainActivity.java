@@ -101,6 +101,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume(){
         super.onResume();
+        final Button button = findViewById(R.id.button);
+        findViewById(R.id.button2).setEnabled(false);
+        button.setEnabled(true);
+        button.setText("Find");
         IntentFilter intentFilter = new IntentFilter(
                 "capstone.project.action.PERSIST_COMPLETE");
 
@@ -128,6 +132,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
+        //findViewById(R.id.button).setEnabled(true);
+        //findViewById(R.id.button2).setEnabled(false);
         unbindService(mConnection);
         mBound = false;
         Log.d(TAG, "onStop(): Service Unbound");
