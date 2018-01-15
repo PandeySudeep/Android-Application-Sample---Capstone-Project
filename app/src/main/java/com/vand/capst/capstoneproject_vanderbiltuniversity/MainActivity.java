@@ -180,19 +180,49 @@ public class MainActivity extends Activity {
     }
     private double getLatitude(){
 
+        double latitude=0.0;
         if (getSite()=="Statue of Liberty"){
-            return -33.8670522;
-        }else{
+            return 40.689249;
+        }else if (getSite()=="Empire State"){
+            return 0.0;
+        }else if(getSite()=="Brooklyn Bridge"){
+            return 0.0;
+        }else if(getSite()=="Times Square"){
             return 0.0;
         }
+        else if(getSite()=="Rockefeller Center"){
+            return 0.0;
+        }else if(getSite()=="World Trade Center"){
+            return 0.0;
+        }else if(getSite()=="Madison Square Garden"){
+            return 0.0;
+        }
+        else if(getSite()=="Roosevelt Island"){
+            return 0.0;
+        }
+        return latitude;
     }
     private double getLongitude(){
 
+        double longitude=0.0;
         if(getSite()=="Statue of Liberty"){
-            return 151.1957362;
-        }else{
+            return -74.044500;
+        }else if(getSite()=="Empire State"){
+            return 0.0;
+        }else if(getSite()=="Brooklyn Bridge"){
+            return 0.0;
+        }else if(getSite()=="Times Square"){
+            return 0.0;
+        }else if(getSite()=="Rockefeller Center"){
+
+        }else if(getSite()=="World Trade Center"){
+            return 0.0;
+        }else if(getSite()=="Madison Square Garden"){
+            return 0.0;
+        }else if(getSite()=="Roosevelt Island"){
             return 0.0;
         }
+        return longitude;
     }
 
     private class GetWebResponses extends AsyncTask<Void,Void,List<String>>{
