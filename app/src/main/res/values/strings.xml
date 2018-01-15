@@ -11,12 +11,12 @@
         <item>Roosevelt Island</item>
     </string-array>
     <string-array name="interests">
-        <item>Hospitals</item>
-        <item>Libraries</item>
-        <item>Museums</item>
-        <item>Casinos</item>
-        <item>Restaurants</item>
-        <item>Universities</item>
+        <item>hospital</item>
+        <item>library</item>
+        <item>museum</item>
+        <item>casino</item>
+        <item>restaurant</item>
+        <item>university</item>
         <item>Zoos</item>
     </string-array>
 </resources>

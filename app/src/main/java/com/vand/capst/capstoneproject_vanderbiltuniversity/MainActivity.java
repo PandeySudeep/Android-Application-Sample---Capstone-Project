@@ -258,7 +258,7 @@ public class MainActivity extends Activity {
             viewButton.setEnabled(false);
             Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: database cursor desired.");
             List<String> collect = new ArrayList<String>();
-            SQLiteDatabase dbase = new DBHelper(MainActivity.this).getReadableDatabase();
+            SQLiteDatabase dbase = new DBHelper(MainActivity.this).getWritableDatabase();
             Cursor resultSet = dbase.rawQuery("Select place_name from location_table",null);
             while(resultSet.moveToNext()){
 
