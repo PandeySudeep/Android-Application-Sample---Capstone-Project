@@ -14,9 +14,7 @@
         <item>hospital</item>
         <item>library</item>
         <item>museum</item>
-        <item>casino</item>
         <item>restaurant</item>
         <item>university</item>
-        <item>zoo</item>
     </string-array>
 </resources>
