@@ -159,8 +159,6 @@ public class WebService extends Service {
                 //Handler UI_Handler = new Handler(Looper.getMainLooper());
                 //UI_Handler.post(new Runnable(){
                   // public void run(){
-
-
                    //}
                 //});
            }
