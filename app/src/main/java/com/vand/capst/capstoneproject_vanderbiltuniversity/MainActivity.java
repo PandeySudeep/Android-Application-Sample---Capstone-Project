@@ -77,6 +77,7 @@ public class MainActivity extends Activity {
                 //postExecute() [AsyncTask]
                 //create intent holding Webresponse[]..
                 //startActivity(intent) -> ResultView
+                new GetWebResponses().execute();
             }
         });
 
@@ -219,6 +220,7 @@ public class MainActivity extends Activity {
         }
         protected void postExecute(List<String> responseStrings){
             String[] responseArray = new String[responseStrings.size()];
+            responseStrings.toArray(responseArray);
             Intent intent = new Intent(MainActivity.this,ResultView.class);
             intent.putExtra("responseArray",responseArray);
             startActivity(intent);
