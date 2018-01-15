@@ -105,6 +105,7 @@ public class WebService extends Service {
                         } catch (JSONException e) {
                             //e.printStackTrace();
                         }
+                        Log.d(TAG, "execute(): JSONArray size: "+resultArray.length());
                         for(int i=0;i<resultArray.length();i++){
                             JSONObject obj=null;
                             try {
@@ -132,8 +133,9 @@ public class WebService extends Service {
                             cvs.put(LocationContract.LocationEntry.COLUMN_INFO2,
                                     placetype);
                             cvsArray[i++] = cvs;
-                            Log.d(TAG, "execute(): ContentValues achieved");
+
                         }
+                        Log.d(TAG, "execute(): ContentValues achieved with size: "+cvsArray.length);
                         //AsyncTask's doInBackground() to truncate the table.
                         // Insert the array of content at the designated URI.postExecute() of AsyncTask
 
