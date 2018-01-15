@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 
                     String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
                     button.setEnabled(false);
-                    button.setText("processing");
+                    button.setText("thank you..");
                     ws.execute(requestUrl,getInterest());
                     Log.d(TAG, "Find button clicked: Web Service request made");
 
