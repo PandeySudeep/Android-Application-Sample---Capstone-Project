@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
                     setLatitude();
                     setLongitude();
                     Log.d(TAG, "web service called: latitude: "+latitude+"longitude: "+longitude+".");
-                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=500&type=restaurant&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
+                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=1000&type="+getInterest()+"&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
                     button.setEnabled(false);
                     button.setText("thank you..");
                     ws.execute(requestUrl,getInterest());
