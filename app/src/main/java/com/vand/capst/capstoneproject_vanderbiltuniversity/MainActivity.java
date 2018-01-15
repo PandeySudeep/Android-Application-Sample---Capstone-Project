@@ -58,10 +58,8 @@ public class MainActivity extends Activity {
                     button.setText("thank you..");
                     ws.execute(requestUrl,getInterest());
                     Log.d(TAG, "Find button clicked: Web Service request made");
-
                     //Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
