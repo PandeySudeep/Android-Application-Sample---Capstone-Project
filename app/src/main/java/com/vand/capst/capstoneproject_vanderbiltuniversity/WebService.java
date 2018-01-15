@@ -13,6 +13,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Process;
+import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -41,6 +42,8 @@ public class WebService extends Service {
     private final IBinder binder = new LocalBinder();
     //private MainActivity activity = new MainActivity();
     //private ContentResolver cr = activity.getContentResolver();
+    protected final String TAG =
+            getClass().getSimpleName();
 
     //ContentResolver cr = WebService.this.getContentResolver();
     ContentValues[] cvsArray;
@@ -61,12 +64,14 @@ public class WebService extends Service {
         // Get the HandlerThread's Looper and use it for our Handler
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
+        Log.d(TAG, "onCreate(): Bound Service initiated");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-
+        Log.d(TAG, "onBind(): Bound to service and IBinder returned");
         return binder;
+
 
     }
 
@@ -78,6 +83,7 @@ public class WebService extends Service {
     }
 
     public void execute(final String URL, final String placetype){
+        Log.d(TAG, "execute(): service started the web service call");
         mServiceHandler.post(new Runnable(){
            public void run() {
 
@@ -86,10 +92,12 @@ public class WebService extends Service {
                 Network network = new BasicNetwork(new HurlStack());
                 mRequestQueue=new RequestQueue(cache,network);
                 mRequestQueue.start();
+               Log.d(TAG, "execute(): RequestQueue Started");
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,new Response.Listener<JSONObject>(){
                     public void onResponse(JSONObject response){
                      //handle response on UI thread..
+                        Log.d(TAG, "execute(): Response being handled on UI thread");
                         List<String> placenames = new ArrayList<String>();
                         JSONArray resultArray=null;
                         try {
@@ -124,11 +132,13 @@ public class WebService extends Service {
                             cvs.put(LocationContract.LocationEntry.COLUMN_INFO2,
                                     placetype);
                             cvsArray[i++] = cvs;
+                            Log.d(TAG, "execute(): ContentValues achieved");
                         }
                         //AsyncTask's doInBackground() to truncate the table.
                         // Insert the array of content at the designated URI.postExecute() of AsyncTask
 
                         new TruncateTask().execute();
+                        Log.d(TAG, "execute(): AsyncTask just got called");
                         //cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
                           //      cvsArray);
                         //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
@@ -168,16 +178,25 @@ public class WebService extends Service {
 
             SQLiteDatabase db = new DBHelper(WebService.this).getWritableDatabase();
             db.execSQL("DELETE from "+LocationContract.LocationEntry.TABLE_NAME);
+            Log.d(TAG, "AsyncTask.doInBackground(): table truncated..");
             db.close();
             WebService.this.getContentResolver().bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
-            return null;
+            Log.d(TAG, "AsyncTask.doInBackground(): Bulk Insert achieved");
 
-        }
-        protected void onPostExecute(){
             Intent intent = new Intent();
             intent.setAction("capstone.project.action.PERSIST_COMPLETE");
             sendBroadcast(intent);
-            //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
+            Log.d(TAG, "AsyncTask.doInBackground(): Broadcast sent with intent..");
+            return null;
+
         }
+       /* protected void onPostExecute(){
+            Intent intent = new Intent();
+            intent.setAction("capstone.project.action.PERSIST_COMPLETE");
+            sendBroadcast(intent);
+            Log.d(TAG, "AsyncTask.onPostExecute(): Broadcast sent with Intent");
+         */
+            //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
+       // }
     }
 }

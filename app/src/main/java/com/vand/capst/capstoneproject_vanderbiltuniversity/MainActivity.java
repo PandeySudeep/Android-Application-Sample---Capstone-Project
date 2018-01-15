@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,6 +35,9 @@ public class MainActivity extends Activity {
     private Context ctx = this;
 
     private BroadcastReceiver mReceiver;
+    protected final String TAG =
+            getClass().getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         initializeViews();
+        Log.d(TAG, "onCreate(): MainActivity initiated");
 
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +57,7 @@ public class MainActivity extends Activity {
                     button.setEnabled(false);
                     button.setText("processing");
                     ws.execute(requestUrl,getInterest());
+                    Log.d(TAG, "Find button clicked: Web Service request made");
 
                     //Toast.makeText(ctx, "just called execute()" , Toast.LENGTH_SHORT).show();
                 }
@@ -71,7 +77,9 @@ public class MainActivity extends Activity {
                 //postExecute() [AsyncTask]
                 //create intent holding Webresponse[]..
                 //startActivity(intent) -> ResultView
+                Log.d(TAG, "View Results - button clicked: GetWebResponse AsyncTask called..");
                 new GetWebResponses().execute();
+
             }
         });
 
@@ -84,6 +92,7 @@ public class MainActivity extends Activity {
         // Bind to LocalService
         Intent intent = new Intent(this, WebService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        Log.d(TAG, "onStart(): bindService() called");
     }
 
     @Override
@@ -103,19 +112,22 @@ public class MainActivity extends Activity {
             }
         };
         //registering our receiver
-        this.registerReceiver(mReceiver, intentFilter);
+        this.registerReceiver(this.mReceiver, intentFilter);
+        Log.d(TAG, "onResume(): Registered Broadcast Receiver");
     }
 
     @Override
     public void onPause(){
         super.onPause();
         this.unregisterReceiver(this.mReceiver);
+        Log.d(TAG, "onPause(): Unregistered Broadcast Receiver");
     }
     @Override
     protected void onStop() {
         super.onStop();
         unbindService(mConnection);
         mBound = false;
+        Log.d(TAG, "onStop(): Service Unbound");
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -127,6 +139,7 @@ public class MainActivity extends Activity {
             WebService.LocalBinder binder = (WebService.LocalBinder) b;
             ws = binder.getService();
             mBound = true;
+            Log.d(TAG, "onStart(): Bound Service Connected");
         }
 
         @Override
@@ -216,16 +229,23 @@ public class MainActivity extends Activity {
         return longitude;
     }
 
-    private class GetWebResponses extends AsyncTask<Void,Void,List<String>>{
+    //private class GetWebResponses extends AsyncTask<Void,Void,List<String>>{
+      private class GetWebResponses extends AsyncTask<Void,Void,Void>{
 
         //Webresponse[] googleServiceResponses=null;
 
-        protected void preExecute(){
+       /* protected void preExecute(){
 
+            Log.d(TAG, "AsyncTask(GetWebResponse) preExecute(): disable the button");
             Button viewButton = findViewById(R.id.button2);
             viewButton.setEnabled(false);
-        }
-        protected List<String> doInBackground(Void...params){
+        }*/
+        protected Void doInBackground(Void...params){
+
+            Log.d(TAG, "AsyncTask(GetWebResponse) doInBackground(): disable the button");
+            Button viewButton = findViewById(R.id.button2);
+            viewButton.setEnabled(false);
+            Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: database cursor desired.");
             List<String> collect = new ArrayList<String>();
             SQLiteDatabase dbase = new DBHelper(MainActivity.this).getReadableDatabase();
             Cursor resultSet = dbase.rawQuery("Select place_name from location_table",null);
@@ -234,17 +254,24 @@ public class MainActivity extends Activity {
                 collect.add(resultSet.getString(0));
 
             }
+            Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: data from database achieved.");
             dbase.close();
            // return Arrays.asList(collect);
             //String[] googleServiceResponses = new Webresponse[collect.size()];
-            return collect;
+            //return collect;
+            String[] responseArray = new String[collect.size()];
+            collect.toArray(responseArray);
+            Intent intent = new Intent(MainActivity.this,ResultView.class);
+            intent.putExtra("responseArray",responseArray);
+            startActivity(intent);
+            return null;
         }
-        protected void postExecute(List<String> responseStrings){
+       /* protected void postExecute(List<String> responseStrings){
             String[] responseArray = new String[responseStrings.size()];
             responseStrings.toArray(responseArray);
             Intent intent = new Intent(MainActivity.this,ResultView.class);
             intent.putExtra("responseArray",responseArray);
             startActivity(intent);
-        }
+        }*/
     }
 }
