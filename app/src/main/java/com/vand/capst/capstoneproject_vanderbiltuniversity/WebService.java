@@ -1,11 +1,9 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.app.Service;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabaseLockedException;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
@@ -30,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -40,14 +37,13 @@ public class WebService extends Service {
     private ServiceHandler mServiceHandler;
     private RequestQueue mRequestQueue;
     private final IBinder binder = new LocalBinder();
-    //private MainActivity activity = new MainActivity();
-    //private ContentResolver cr = activity.getContentResolver();
+
     protected final String TAG =
             getClass().getSimpleName();
 
-    //ContentResolver cr = WebService.this.getContentResolver();
     ContentValues[] cvsArray;
 
+    //Handler class as inner class. This is needed to run bound service on worker thread.
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -57,6 +53,9 @@ public class WebService extends Service {
 
     @Override
     public void onCreate(){
+        /**
+         * create worker thread to start bound service task.
+         */
         HandlerThread thread = new HandlerThread("ServiceStartArguments",
                 Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
@@ -64,12 +63,12 @@ public class WebService extends Service {
         // Get the HandlerThread's Looper and use it for our Handler
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
-        Log.d(TAG, "onCreate(): Bound Service initiated");
+        //Log.d(TAG, "onCreate(): Bound Service initiated");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "onBind(): Bound to service and IBinder returned");
+        //Log.d(TAG, "onBind(): Bound to service and IBinder returned");
         return binder;
 
 
@@ -83,39 +82,35 @@ public class WebService extends Service {
     }
 
     public void execute(final String URL, final String placetype){
-        Log.d(TAG, "execute(): service started the web service call with URL: "+URL+" placetype: "+placetype+".");
+        //Log.d(TAG, "execute(): service started the web service call with URL: "+URL+" placetype: "+placetype+".");
+        /**
+         * on the worker thread - initiate Google Place API Web Service call to fetch data.
+         */
         mServiceHandler.post(new Runnable(){
            public void run() {
-
-
                 Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
                 Network network = new BasicNetwork(new HurlStack());
                 mRequestQueue=new RequestQueue(cache,network);
                 mRequestQueue.start();
-               Log.d(TAG, "execute(): RequestQueue Started");
+               //Log.d(TAG, "execute(): RequestQueue Started");
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,new Response.Listener<JSONObject>(){
                     public void onResponse(JSONObject response){
                      //handle response on UI thread..
-                        Log.d(TAG, "execute(): Response being handled on UI thread");
+                        //Log.d(TAG, "execute(): Response being handled on UI thread");
                         List<String> placenames = new ArrayList<String>();
                         JSONArray resultArray=null;
                         try {
                             resultArray = response.getJSONArray("results");
-                        } catch (JSONException e) {
-                            //e.printStackTrace();
-                        }
-                        Log.d(TAG, "execute(): JSONArray size: "+resultArray.length());
+                        } catch (JSONException e) {}
+                        //Log.d(TAG, "execute(): JSONArray size: "+resultArray.length());
                         for(int i=0;i<resultArray.length();i++){
                             JSONObject obj=null;
                             try {
                                 obj = resultArray.getJSONObject(i);
                                 String name = obj.getString("name");
                                 placenames.add(name);
-                            } catch (JSONException e) {
-                                //e.printStackTrace();
-                            }
-
+                            } catch (JSONException e) {}
                         }
 
                     //bulk insert using content provider
@@ -135,16 +130,13 @@ public class WebService extends Service {
                             cvsArray[i++] = cvs;
 
                         }
-                        Log.d(TAG, "execute(): ContentValues achieved with size: "+cvsArray.length);
-                        //AsyncTask's doInBackground() to truncate the table.
-                        // Insert the array of content at the designated URI.postExecute() of AsyncTask
-
+                        //Log.d(TAG, "execute(): ContentValues achieved with size: "+cvsArray.length);
+                        /**
+                         * truncate the table to erase old web service call data, insert new data from fresh web service call, and
+                         * send broadcast - all in background thread via AsyncTask.
+                         */
                         new TruncateTask().execute();
-                        Log.d(TAG, "execute(): AsyncTask just got called");
-                        //cr.bulkInsert(LocationContract.LocationEntry.CONTENT_URI,
-                          //      cvsArray);
-                        //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
-
+                        //Log.d(TAG, "execute(): AsyncTask just got called");
 
                     }
                 },new Response.ErrorListener(){
@@ -178,25 +170,17 @@ public class WebService extends Service {
 
             SQLiteDatabase db = new DBHelper(WebService.this).getWritableDatabase();
             db.execSQL("DELETE from "+LocationContract.LocationEntry.TABLE_NAME);
-            Log.d(TAG, "AsyncTask.doInBackground(): table truncated..");
+            //Log.d(TAG, "AsyncTask.doInBackground(): table truncated..");
             db.close();
             WebService.this.getContentResolver().bulkInsert(LocationContract.LocationEntry.CONTENT_URI,cvsArray);
-            Log.d(TAG, "AsyncTask.doInBackground(): Bulk Insert achieved");
+            //Log.d(TAG, "AsyncTask.doInBackground(): Bulk Insert achieved");
 
             Intent intent = new Intent();
             intent.setAction("capstone.project.action.PERSIST_COMPLETE");
             sendBroadcast(intent);
-            Log.d(TAG, "AsyncTask.doInBackground(): Broadcast sent with intent..");
+            //Log.d(TAG, "AsyncTask.doInBackground(): Broadcast sent with intent..");
             return null;
 
         }
-       /* protected void onPostExecute(){
-            Intent intent = new Intent();
-            intent.setAction("capstone.project.action.PERSIST_COMPLETE");
-            sendBroadcast(intent);
-            Log.d(TAG, "AsyncTask.onPostExecute(): Broadcast sent with Intent");
-         */
-            //sendBroadcast(new Intent(MyReceiver.ACTION_PERSIST_COMPLETE));
-       // }
     }
 }

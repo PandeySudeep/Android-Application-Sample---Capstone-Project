@@ -22,7 +22,6 @@ public class ResultView extends Activity {
         //get Webresponse[] from intent.
         final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
 
-        //Webresponse[] param=null;//placeholder
         CapstoneAdapter adapter = new CapstoneAdapter(responseObjects);
 
         recyclerView.setAdapter(adapter);
