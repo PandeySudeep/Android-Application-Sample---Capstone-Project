@@ -80,8 +80,33 @@ public class MainActivity extends Activity {
                 //postExecute() [AsyncTask]
                 //create intent holding Webresponse[]..
                 //startActivity(intent) -> ResultView
-                Log.d(TAG, "View Results - button clicked: GetWebResponse AsyncTask called..");
-                new GetWebResponses().execute();
+                //Log.d(TAG, "View Results - button clicked: GetWebResponse AsyncTask called..");
+                //new GetWebResponses().execute();
+
+                //Log.d(TAG, "AsyncTask(GetWebResponse) doInBackground(): disable the button");
+                Button viewButton = findViewById(R.id.button2);
+                viewButton.setEnabled(false);
+                //Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: database cursor desired.");
+                List<String> collect = new ArrayList<String>();
+                SQLiteDatabase dbase = new DBHelper(MainActivity.this).getWritableDatabase();
+                Cursor resultSet = dbase.rawQuery("Select place_name from location_table",null);
+                while(resultSet.moveToNext()){
+
+                    collect.add(resultSet.getString(0));
+
+                }
+                //Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: data from database achieved.");
+                dbase.close();
+                // return Arrays.asList(collect);
+                //String[] googleServiceResponses = new Webresponse[collect.size()];
+                //return collect;
+                String[] responseArray = new String[collect.size()];
+                collect.toArray(responseArray);
+                Intent intent = new Intent(MainActivity.this,ResultView.class);
+                intent.putExtra("responseArray",responseArray);
+                startActivity(intent);
+                //return null;
+
 
             }
         });
@@ -241,7 +266,7 @@ public class MainActivity extends Activity {
     }
 
     //private class GetWebResponses extends AsyncTask<Void,Void,List<String>>{
-      private class GetWebResponses extends AsyncTask<Void,Void,Void>{
+      //private class GetWebResponses extends AsyncTask<Void,Void,Void>{
 
         //Webresponse[] googleServiceResponses=null;
 
@@ -251,7 +276,7 @@ public class MainActivity extends Activity {
             Button viewButton = findViewById(R.id.button2);
             viewButton.setEnabled(false);
         }*/
-        protected Void doInBackground(Void...params){
+        /*protected Void doInBackground(Void...params){
 
             Log.d(TAG, "AsyncTask(GetWebResponse) doInBackground(): disable the button");
             Button viewButton = findViewById(R.id.button2);
@@ -276,7 +301,7 @@ public class MainActivity extends Activity {
             intent.putExtra("responseArray",responseArray);
             startActivity(intent);
             return null;
-        }
+        }*/
        /* protected void postExecute(List<String> responseStrings){
             String[] responseArray = new String[responseStrings.size()];
             responseStrings.toArray(responseArray);
@@ -284,5 +309,5 @@ public class MainActivity extends Activity {
             intent.putExtra("responseArray",responseArray);
             startActivity(intent);
         }*/
-    }
+    //}
 }
