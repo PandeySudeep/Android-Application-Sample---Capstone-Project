@@ -83,7 +83,7 @@ public class WebService extends Service {
     }
 
     public void execute(final String URL, final String placetype){
-        Log.d(TAG, "execute(): service started the web service call");
+        Log.d(TAG, "execute(): service started the web service call with URL: "+URL+" placetype: "+placetype+".");
         mServiceHandler.post(new Runnable(){
            public void run() {
 

@@ -37,6 +37,8 @@ public class MainActivity extends Activity {
     private BroadcastReceiver mReceiver;
     protected final String TAG =
             getClass().getSimpleName();
+    private double latitude;
+    private double longitude;
 
 
     @Override
@@ -53,7 +55,10 @@ public class MainActivity extends Activity {
 
                 if (mBound) {
 
-                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+getLatitude()+","+getLongitude()+"&radius=500&type=restaurant&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
+                    setLatitude();
+                    setLongitude();
+                    Log.d(TAG, "web service called: latitude: "+latitude+"longitude: "+longitude+".");
+                    String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=500&type=restaurant&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
                     button.setEnabled(false);
                     button.setText("thank you..");
                     ws.execute(requestUrl,getInterest());
@@ -180,51 +185,53 @@ public class MainActivity extends Activity {
         String text = mySpinner.getSelectedItem().toString();
         return text;
     }
-    private double getLatitude(){
+    //double latitude;
+    private void setLatitude(){
 
-        double latitude=0.0;
-        if (getSite()=="Statue of Liberty"){
-            return 40.689249;
-        }else if (getSite()=="Empire State"){
-            return 40.748817;
-        }else if(getSite()=="Brooklyn Bridge"){
-            return 40.757715;
-        }else if(getSite()=="Times Square"){
-            return 40.758896;
+        //double latitude=40.689249;
+        if (getSite().equals("Statue of Liberty")){
+            latitude= 40.689249;
+        }else if (getSite().equals("Empire State")){
+            latitude=40.748817;
+        }else if(getSite().equals("Brooklyn Bridge")){
+            latitude=40.757715;
+        }else if(getSite().equals("Times Square")){
+            latitude=40.758896;
         }
-        else if(getSite()=="Rockefeller Center"){
-            return 40.75874;
-        }else if(getSite()=="World Trade Center"){
-            return 40.711801;
-        }else if(getSite()=="Madison Square Garden"){
-            return 40.750298;
+        else if(getSite().equals("Rockefeller Center")){
+            latitude=40.75874;
+        }else if(getSite().equals("World Trade Center")){
+            latitude=40.711801;
+        }else if(getSite().equals("Madison Square Garden")){
+            latitude=40.750298;
         }
-        else if(getSite()=="Roosevelt Island"){
-            return 38.895073;
+        else if(getSite().equals("Roosevelt Island")){
+            latitude=38.895073;
         }
-        return latitude;
+       // return latitude;
     }
-    private double getLongitude(){
+    //double longitude;
+    private void setLongitude(){
 
-        double longitude=0.0;
-        if(getSite()=="Statue of Liberty"){
-            return -74.044500;
-        }else if(getSite()=="Empire State"){
-            return -73.985428;
-        }else if(getSite()=="Brooklyn Bridge"){
-            return -73.98152829999998;
-        }else if(getSite()=="Times Square"){
-            return  -73.985130;
-        }else if(getSite()=="Rockefeller Center"){
-            return -73.978674;
-        }else if(getSite()=="World Trade Center"){
-            return -74.013120;
-        }else if(getSite()=="Madison Square Garden"){
-            return  -73.993324;
-        }else if(getSite()=="Roosevelt Island"){
-            return -77.061859;
+        //double longitude=-74.044500;
+        if(getSite().equals("Statue of Liberty")){
+            longitude=-74.044500;
+        }else if(getSite().equals("Empire State")){
+            longitude=-73.985428;
+        }else if(getSite().equals("Brooklyn Bridge")){
+            longitude=-73.98152829999998;
+        }else if(getSite().equals("Times Square")){
+            longitude=-73.985130;
+        }else if(getSite().equals("Rockefeller Center")){
+            longitude=-73.978674;
+        }else if(getSite().equals("World Trade Center")){
+            longitude=-74.013120;
+        }else if(getSite().equals("Madison Square Garden")){
+            longitude=-73.993324;
+        }else if(getSite().equals("Roosevelt Island")){
+            longitude= -77.061859;
         }
-        return longitude;
+        //return longitude;
     }
 
     //private class GetWebResponses extends AsyncTask<Void,Void,List<String>>{
