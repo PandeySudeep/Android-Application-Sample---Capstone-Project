@@ -29,12 +29,13 @@ within which to return place results.)
 ### Structure Details
 
 ***MainActivity.java*** is the application launcher. It provides UI to allow user
-enter inputs and a button to trigger web service call. ***MyContentProvider.java***,
+enter inputs and a button to trigger web service call. It also includes
+ a broadcast receiver that is registered to receive broadcast sent by the 
+ bound service. ***MyContentProvider.java***,
  ***LocationContract.java***, ***DBHelper.java*** together provide content provider
 implementation. ***ResultView.java*** is the second activity that displays
 RecyclerView consisting of results retrieved via web service. ***CapstoneAdapter.java***
 is recyclerview specific adapter. ***WebService.java*** is a bound service that
 MainActivity binds to for web service call. It uses ***ServiceHandler*** and ***Looper*** 
  to run it's logic in a separate handler thread. ***Webresponse.java*** is a POJO for
-holding result data. ***MyReceiver.java*** is a broadcast receiver that responds
- to broadcast sent after successful web service call.
+holding result data.
