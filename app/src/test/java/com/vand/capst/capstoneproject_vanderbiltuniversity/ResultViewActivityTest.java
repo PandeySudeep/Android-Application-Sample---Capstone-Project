@@ -51,4 +51,9 @@ public class ResultViewActivityTest {
         //when(stubBinder.getService()).thenReturn(mock(WebService.class));
         //Shadows.shadowOf(RuntimeEnvironment.application).setComponentNameAndServiceForBindService(new ComponentName("com.vand.capst.capstoneproject_vanderbiltuniversity","WebService"), stubBinder);
     //}
+
+    //@Test
+   // public void clickingFindMeShouldChangeMainActivityState(){
+
+    //}
 }
