@@ -43,6 +43,7 @@ public class ResultViewActivityTest {
    // View.OnClickListener listener;
 
     MainActivity activity;
+    //WebService boundService;
 
     @Before
     public void setUp() throws Exception{
@@ -121,4 +122,6 @@ public class ResultViewActivityTest {
         assertTrue(activity.findViewById(R.id.button2).isEnabled());
 
     }
+
+
 }
