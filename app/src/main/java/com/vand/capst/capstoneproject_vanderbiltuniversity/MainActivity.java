@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     private boolean mBound=false;
     private WebService ws;
     private Context ctx = this;
-    private BroadcastReceiver mReceiver;
+    BroadcastReceiver mReceiver;
     protected final String TAG =
             getClass().getSimpleName();
     private double latitude;
