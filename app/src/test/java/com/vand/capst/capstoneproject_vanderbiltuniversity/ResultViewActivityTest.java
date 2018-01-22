@@ -23,6 +23,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.Mockito;
 
@@ -35,6 +37,7 @@ public class ResultViewActivityTest {
 
    // @Mock
     //WebService ws;
+
 
    // @Mock
    // View.OnClickListener listener;
@@ -52,7 +55,7 @@ public class ResultViewActivityTest {
     }
 
     @Test
-    public void activityStateWhenMainActivityLaunches() {
+    public void activityStateWhenMainActivityLaunches() throws Exception {
 
         //mockBoundLocalService();
         //MainActivity activity = Robolectric.setupActivity(MainActivity.class);
@@ -76,36 +79,8 @@ public class ResultViewActivityTest {
     //}
 
 
-   /* @Test
-   public void clickingFindMeShouldChangeMainActivityState(){
-
-       // activity = Robolectric.setupActivity(MainActivity.class);
-        //activity.mBound=true;
-        //when(listener.onClick(mock(View.class)).doAnswer(ws.execute(anyString(),anyString())));
-        //ws.execute(anyString(),anyString()).when(listener.onClick(mock(View.class)));
-        //Mockito.doAnswer(ws.execute(anyString(),anyString())).when(listener.onClick(mock(View.class)));
-        //activity.findViewById(R.id.button).setOnClickListener(listener);
-        activity.findViewById(R.id.button).performClick();
-
-        //WebService.onCreate();
-
-
-        assertFalse(activity.findViewById(R.id.button).isEnabled());
-        //assertEquals((Button)activity.findViewById(R.id.button).getAccessibilityClassName(),"thank you..");
-
-        //activity.setLatitude();
-        //activity.setLongitude();
-        //Log.d(TAG, "web service called: latitude: "+latitude+"longitude: "+longitude+".");
-        //String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+activity.latitude+","+activity.longitude+"&radius=1000&type="+activity.getInterest()+"&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
-        //button.setEnabled(false);
-        //button.setText("thank you..");
-        //ws.execute(anyString(),anyString());
-        assertFalse(activity.findViewById(R.id.button2).isEnabled());
-
-    }*/
-
     @Test
-    public void broadcastReceiverWhenCalledEnablesViewButton(){
+    public void broadcastReceiverWhenCalledEnablesViewButton() throws Exception{
 
         Application application = RuntimeEnvironment.application;
         //Intent expectedService = new Intent(application, SampleIntentService.class);
@@ -129,4 +104,21 @@ public class ResultViewActivityTest {
         //assertEquals("Started service class ", serviceIntent.getComponent(),
                 //expectedService.getComponent());
 
+
+
+    @Test
+    public void sendingBroadcastSuccessfullyCallsReceiver() throws Exception{
+
+        Application application = RuntimeEnvironment.application;
+        Intent intent = new Intent();
+        intent.setAction("capstone.project.action.PERSIST_COMPLETE");
+        application.sendBroadcast(intent);
+
+        //BroadcastReceiver receiver = Mockito.spy(activity.mReceiver);
+
+        //verify((activity.mReceiver), times(1)).onReceive(application,intent);
+        //verify((Mockito.spy(activity.mReceiver)), times(1)).onReceive(application,intent);
+        assertTrue(activity.findViewById(R.id.button2).isEnabled());
+
+    }
 }
