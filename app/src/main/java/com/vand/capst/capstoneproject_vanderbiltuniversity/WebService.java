@@ -11,7 +11,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Process;
-import android.util.Log;
+//import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -49,12 +49,12 @@ public class WebService extends Service {
             super(looper);
         }
     }
-    public WebService() {}
+    public WebService(){}
 
     @Override
     public void onCreate(){
         /**
-         * create worker thread to start bound service task.
+         * Create worker thread to start bound service task.
          */
         HandlerThread thread = new HandlerThread("ServiceStartArguments",
                 Process.THREAD_PRIORITY_BACKGROUND);
@@ -70,8 +70,6 @@ public class WebService extends Service {
     public IBinder onBind(Intent intent) {
         //Log.d(TAG, "onBind(): Bound to service and IBinder returned");
         return binder;
-
-
     }
 
     public class LocalBinder extends Binder {

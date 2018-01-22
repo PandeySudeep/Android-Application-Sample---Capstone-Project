@@ -211,8 +211,7 @@ public class MainActivity extends Activity {
             latitude=40.757715;
         }else if(getSite().equals("Times Square")){
             latitude=40.758896;
-        }
-        else if(getSite().equals("Rockefeller Center")){
+        }else if(getSite().equals("Rockefeller Center")){
             latitude=40.75874;
         }else if(getSite().equals("World Trade Center")){
             latitude=40.711801;

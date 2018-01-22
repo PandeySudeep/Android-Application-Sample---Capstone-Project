@@ -184,7 +184,6 @@ public class MyContentProvider extends ContentProvider {
         }
     }
 
-
     /**
      * Method that handles bulk insert requests.
      */
