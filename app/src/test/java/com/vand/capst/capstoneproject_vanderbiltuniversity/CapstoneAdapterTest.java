@@ -22,6 +22,8 @@ import org.robolectric.shadows.RoboLayoutInflater;
 import org.robolectric.shadows.ShadowFrameLayout;
 import org.robolectric.shadows.ShadowView;
 import org.robolectric.shadows.ShadowViewGroup;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 
 import static org.junit.Assert.assertEquals;
 
@@ -60,14 +62,15 @@ public class CapstoneAdapterTest {
         cardView =  (CardView)inflater.from(Robolectric.buildActivity(ResultView.class).get()).inflate(R.layout.card_v,null);
 
         rView = (RecyclerView)inflater.from(Robolectric.buildActivity(ResultView.class).get()).inflate(R.layout.activity_result_view,null).findViewById(R.id.recyclerView);
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,1);
+        LinearLayoutManager manager = new LinearLayoutManager(Robolectric.buildActivity(ResultView.class).get());
+        //manager.generateDefaultLayoutParams();
         //{
           //  @Override
             //public RecyclerView.LayoutParams generateDefaultLayoutParams() {
               //  return new RecyclerView.LayoutParams(4,8);
             //}
         //};
-        manager.addView(rView);
+        manager.addView(cardView);
 
         //svg.addView(cardView,0,new ViewGroup.LayoutParams(2,4));
         //svg.addView(cardView,1,new ViewGroup.LayoutParams(2,4));
