@@ -15,6 +15,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import android.widget.TextView;
+
 
 /**
  * Created by Sudeep.Pandey on 1/23/2018.
@@ -50,5 +52,18 @@ public class CapstoneAdapterTest {
         CapstoneAdapter.ViewHolder holder = adapter.onCreateViewHolder(rView,0);
         assertNotNull(holder);
         assertTrue(holder.getClass()==(new CapstoneAdapter.ViewHolder(cardView).getClass()));
+    }
+
+    @Test
+    public void checkIfOnBindViewHolderGeneratesCorrectCardView() throws Exception{
+
+        TextView textView = (TextView)cardView.findViewById(R.id.web_response);
+
+        adapter.onBindViewHolder(new CapstoneAdapter.ViewHolder(cardView),1);
+        assertEquals(textView.getText(),"two");
+
+        adapter.onBindViewHolder(new CapstoneAdapter.ViewHolder(cardView),0);
+        assertEquals(textView.getText(),"one");
+
     }
 }
