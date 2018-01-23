@@ -60,14 +60,15 @@ public class CapstoneAdapterTest {
         cardView =  (CardView)inflater.from(Robolectric.buildActivity(ResultView.class).get()).inflate(R.layout.card_v,null);
 
         rView = (RecyclerView)inflater.from(Robolectric.buildActivity(ResultView.class).get()).inflate(R.layout.activity_result_view,null).findViewById(R.id.recyclerView);
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,1);
+        //StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,1);
         //{
           //  @Override
             //public RecyclerView.LayoutParams generateDefaultLayoutParams() {
               //  return new RecyclerView.LayoutParams(4,8);
             //}
         //};
-        manager.addView(rView);
+        //manager.addView(rView);
+
 
         //svg.addView(cardView,0,new ViewGroup.LayoutParams(2,4));
         //svg.addView(cardView,1,new ViewGroup.LayoutParams(2,4));
