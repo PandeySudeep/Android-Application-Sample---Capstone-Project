@@ -1,9 +1,9 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
-
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,10 +34,8 @@ public class CapstoneAdapterTest {
         RoboLayoutInflater inflater = new RoboLayoutInflater(Robolectric.buildActivity(ResultView.class).get());
         cardView =  (CardView)inflater.from(Robolectric.buildActivity(ResultView.class).get()).inflate(R.layout.card_v,null);
         rView = (RecyclerView)inflater.from(Robolectric.buildActivity(ResultView.class).get()).inflate(R.layout.activity_result_view,null).findViewById(R.id.recyclerView);
-        LinearLayoutManager manager = new LinearLayoutManager(Robolectric.buildActivity(ResultView.class).get());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,1);
         rView.setLayoutManager(manager);
-
     }
 
     @Test
