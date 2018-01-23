@@ -50,7 +50,5 @@ public class CapstoneAdapterTest {
         CapstoneAdapter.ViewHolder holder = adapter.onCreateViewHolder(rView,0);
         assertNotNull(holder);
         assertTrue(holder.getClass()==(new CapstoneAdapter.ViewHolder(cardView).getClass()));
-
     }
-
 }
