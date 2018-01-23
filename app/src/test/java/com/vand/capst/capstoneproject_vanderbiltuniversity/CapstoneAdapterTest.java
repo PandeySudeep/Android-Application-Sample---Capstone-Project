@@ -26,6 +26,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Sudeep.Pandey on 1/23/2018.
@@ -70,7 +72,9 @@ public class CapstoneAdapterTest {
               //  return new RecyclerView.LayoutParams(4,8);
             //}
         //};
-        manager.addView(cardView);
+        //manager.addView(cardView);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        rView.setLayoutManager(manager);
 
         //svg.addView(cardView,0,new ViewGroup.LayoutParams(2,4));
         //svg.addView(cardView,1,new ViewGroup.LayoutParams(2,4));
@@ -90,7 +94,9 @@ public class CapstoneAdapterTest {
         //adapter.onCreateViewHolder(Shadows.shadowOf(v),1);
         //assertEquals();
         CapstoneAdapter.ViewHolder holder = adapter.onCreateViewHolder(rView,0);
-        assertEquals(holder,new CapstoneAdapter.ViewHolder(cardView));
+        //assertEquals(holder,new CapstoneAdapter.ViewHolder(cardView));
+        assertNotNull(holder);
+        assertTrue(holder.getClass()==(new CapstoneAdapter.ViewHolder(cardView).getClass()));
     }
 
     //@Implements(ViewGroup.class)
