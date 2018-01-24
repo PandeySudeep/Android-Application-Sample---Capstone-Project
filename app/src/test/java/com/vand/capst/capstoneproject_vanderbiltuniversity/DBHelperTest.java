@@ -140,6 +140,7 @@ public class DBHelperTest {
 
 
 
+
     private void setupTable(SQLiteDatabase db, String table) {
         db.execSQL("CREATE TABLE " + table + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -158,6 +159,22 @@ public class DBHelperTest {
         assertEquals(db.query(table, null, null, null,
                 null, null, null).getCount(),(expectedVals));
     }
+
+    @Test
+    public void testMultipleDbsPreserveData() throws Exception {
+        final String TABLE_NAME1 = "fart", TABLE_NAME2 = "fart2";
+        SQLiteDatabase db1 = helper.getWritableDatabase();
+        setupTable(db1, TABLE_NAME1);
+        insertData(db1, TABLE_NAME1, new int[]{1, 2});
+        DBHelper helper2 = new DBHelper(ctx);
+        SQLiteDatabase db2 = helper2.getWritableDatabase();
+        setupTable(db2, TABLE_NAME2);
+        insertData(db2, TABLE_NAME2, new int[]{4, 5, 6});
+        verifyData(db1, TABLE_NAME1, 2);
+        verifyData(db2, TABLE_NAME2, 3);
+    }
+
+
 
 
     //private static void assertInitialDB(SQLiteDatabase database, TestOpenHelper helper) {
