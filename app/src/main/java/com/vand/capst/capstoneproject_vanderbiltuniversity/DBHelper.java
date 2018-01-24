@@ -43,10 +43,10 @@ extends SQLiteOpenHelper
          * @param context Any context
          */
     public DBHelper(Context context) {
-        super(context,
-                context.getCacheDir()
-                        + File.separator
-                        + DATABASE_NAME,
+        super(context,DATABASE_NAME,
+                //context.getCacheDir()
+                        //+ File.separator
+                        //+ DATABASE_NAME,
                 null,
                 DATABASE_VERSION);
     }
