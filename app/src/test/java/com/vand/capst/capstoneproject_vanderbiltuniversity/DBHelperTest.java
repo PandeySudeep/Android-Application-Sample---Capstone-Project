@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 //import org.robolectric.RuntimeEnvironment;
 //import org.robolectric.annotation.Config;
 //import org.robolectric.TestRunners;
@@ -31,7 +32,8 @@ public class DBHelperTest {
 
     //private TestOpenHelper helper;
     private DBHelper helper;
-    Context ctx = Robolectric.buildActivity(MainActivity.class).get();
+    //Context ctx = Robolectric.buildActivity(MainActivity.class).get();
+    Context ctx = RuntimeEnvironment.application;
 
     public static boolean onCreateCalled=false;
     public static boolean onUpgradeCalled=false;
@@ -81,6 +83,58 @@ public class DBHelperTest {
 
         assertTrue(db1==db2);
     }
+
+    @Test
+    public void testInitialGetWritableDatabase() throws Exception {
+        SQLiteDatabase database = helper.getWritableDatabase();
+        //assertInitialDB(database, helper);
+        //assertDatabaseOpened(database, helper);
+        assertNotNull(database);
+        assertTrue(database.isOpen());
+    }
+
+    @Test
+    public void testSubsequentGetWritableDatabase() throws Exception {
+        helper.getWritableDatabase();
+        helper.close();
+
+        //assertSubsequentDB(helper.getWritableDatabase(), helper);
+        assertNotNull(helper.getWritableDatabase());
+        assertTrue(helper.getWritableDatabase().isOpen());
+    }
+
+    @Test
+    public void testSameDBInstanceSubsequentGetWritableDatabase() throws Exception {
+        SQLiteDatabase db1 = helper.getWritableDatabase();
+        SQLiteDatabase db2 = helper.getWritableDatabase();
+
+        assertTrue(db1==db2);
+    }
+
+    @Test
+    public void testClose() throws Exception {
+        SQLiteDatabase database = helper.getWritableDatabase();
+
+        assertTrue(database.isOpen());
+        helper.close();
+        assertFalse(database.isOpen());
+    }
+
+    @Test
+    public void testCloseMultipleDbs() throws Exception {
+        DBHelper helper2 = new DBHelper(ctx);
+        SQLiteDatabase database1 = helper.getWritableDatabase();
+        SQLiteDatabase database2 = helper2.getWritableDatabase();
+        assertTrue(database1.isOpen());
+        assertTrue(database2.isOpen());
+        helper.close();
+        assertFalse(database1.isOpen());
+
+        assertTrue(database2.isOpen());
+        helper2.close();
+        assertFalse(database2.isOpen());
+    }
+
 
 
     //private static void assertInitialDB(SQLiteDatabase database, TestOpenHelper helper) {
