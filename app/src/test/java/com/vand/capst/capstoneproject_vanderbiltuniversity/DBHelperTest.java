@@ -3,6 +3,8 @@ package com.vand.capst.capstoneproject_vanderbiltuniversity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import android.content.ContentValues;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +23,7 @@ import java.io.File;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Sudeep.Pandey on 1/24/2018.
@@ -135,6 +138,26 @@ public class DBHelperTest {
         assertFalse(database2.isOpen());
     }
 
+
+
+    private void setupTable(SQLiteDatabase db, String table) {
+        db.execSQL("CREATE TABLE " + table + " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "testVal INTEGER DEFAULT 0" +
+                ");");
+    }
+    private void insertData(SQLiteDatabase db, String table, int[] values) {
+        for (int i : values) {
+            ContentValues cv = new ContentValues();
+            cv.put("testVal", i);
+            db.insert(table, null, cv);
+        }
+    }
+
+    private void verifyData(SQLiteDatabase db, String table, int expectedVals) {
+        assertEquals(db.query(table, null, null, null,
+                null, null, null).getCount(),(expectedVals));
+    }
 
 
     //private static void assertInitialDB(SQLiteDatabase database, TestOpenHelper helper) {
