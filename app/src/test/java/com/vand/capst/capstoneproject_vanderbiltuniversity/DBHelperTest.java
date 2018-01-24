@@ -74,6 +74,14 @@ public class DBHelperTest {
          //assertFalse(helper.onCreateCalled);
     }
 
+    @Test
+    public void testSameDBInstanceSubsequentGetReadableDatabase() throws Exception {
+        SQLiteDatabase db1 = helper.getReadableDatabase();
+        SQLiteDatabase db2 = helper.getReadableDatabase();
+
+        assertTrue(db1==db2);
+    }
+
 
     //private static void assertInitialDB(SQLiteDatabase database, TestOpenHelper helper) {
        // assertDatabaseOpened(database, helper);
