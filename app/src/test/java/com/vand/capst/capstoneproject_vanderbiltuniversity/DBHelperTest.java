@@ -1,6 +1,7 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.content.ContentValues;
@@ -12,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowBinder;
 //import org.robolectric.RuntimeEnvironment;
 //import org.robolectric.annotation.Config;
 //import org.robolectric.TestRunners;
@@ -38,9 +41,9 @@ public class DBHelperTest {
     //Context ctx = Robolectric.buildActivity(MainActivity.class).get();
     Context ctx = RuntimeEnvironment.application;
 
-    public static boolean onCreateCalled=false;
-    public static boolean onUpgradeCalled=false;
-    public static boolean onOpenCalled=false;
+    //public static boolean onCreateCalled=false;
+   // public static boolean onUpgradeCalled=false;
+   // public static boolean onOpenCalled=false;
 
 
     @Before
@@ -62,6 +65,7 @@ public class DBHelperTest {
         //assertTrue(helper.onCreateCalled);
         assertNotNull(database);
         assertTrue(database.isOpen());
+        assertTrue(database.getPath().contains("google_place_db"));
         //assertTrue(helper.onOpenCalled);
         // assertFalse(helper.onUpgradeCalled);
     }
@@ -77,6 +81,17 @@ public class DBHelperTest {
         assertNotNull(database);
         assertTrue(database.isOpen());
          //assertFalse(helper.onCreateCalled);
+    }
+
+    @Test
+    public void onUpgradeImpliesVersionChange() throws Exception{
+        SQLiteDatabase db = helper.getReadableDatabase();
+        helper.onUpgrade(db,1,2);
+        //assertTrue(db.getVersion()==1);
+        Cursor cursor = db.rawQuery("Select * from location_table",null);
+        assertTrue(cursor.getCount()==0);
+
+
     }
 
     @Test
