@@ -102,5 +102,14 @@ public class MainActivityTest {
         //assertTrue(activity!=null);
     //}
 
+   /* @Test
+    public void button_Find_PerformClickWorks() throws Exception{
+
+        activity=Robolectric.buildActivity(MainActivity.class).create().resume().visible().get();
+        activity.findViewById(R.id.button).performClick();
+        assertTrue(activity.findViewById(R.id.button).isEnabled());
+        //assertTrue(activity.findViewById(R.id.button2).isEnabled());
+
+    }*/
 
 }
