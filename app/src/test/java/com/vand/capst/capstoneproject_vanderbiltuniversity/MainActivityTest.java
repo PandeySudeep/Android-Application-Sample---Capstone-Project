@@ -32,8 +32,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -153,17 +155,29 @@ public class MainActivityTest {
        activity=Robolectric.buildActivity(MainActivity.class).create().resume().visible().pause().get();
        activity.sendBroadcast(new Intent("capstone.project.action.PERSIST_COMPLETE"));
        assertFalse(activity.findViewById(R.id.button2).isEnabled());
-
    }
 
+    @Test
+    public void onStopMethodWorksWell() throws Exception{
 
+        mockBoundLocalService();
+        activity=Robolectric.buildActivity(MainActivity.class).create().start().resume().visible().pause().stop().get();
+       // activity.sendBroadcast(new Intent("capstone.project.action.PERSIST_COMPLETE"));
+        //assertFalse(activity.findViewById(R.id.button2).isEnabled());
+        //verify(mock(WebService.class), atLeast(1)).onUnbind(mock(Intent.class));
 
+        //verify(mock(WebService.class)).onUnbind(mock(Intent.class));
+        //mock(activity.m).execute(anyString(),anyString());
+        assertTrue(activity!=null);
+
+    }
 
    private void mockBoundLocalService(){
        WebService.LocalBinder stubBinder = mock(WebService.LocalBinder.class);
        //WebService.LocalBinder stubBinder = mock();
        //when(stubBinder.getService()).thenReturn(mock(WebService.class));
        when(stubBinder.getService()).thenReturn(mock(WebService.class));
+      // when(mock(WebService.class).b)
        //WebService spy=Mockito.spy(ws);
        //Mockito.doNothing().when(spy).execute(anyString(),anyString());
 
