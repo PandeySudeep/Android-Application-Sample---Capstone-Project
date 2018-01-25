@@ -158,7 +158,7 @@ public class MainActivityTest {
    }
 
     @Test
-    public void onStopMethodWorksWell() throws Exception{
+    public void onStopMethodRetainsActivity() throws Exception{
 
         mockBoundLocalService();
         activity=Robolectric.buildActivity(MainActivity.class).create().start().resume().visible().pause().stop().get();
