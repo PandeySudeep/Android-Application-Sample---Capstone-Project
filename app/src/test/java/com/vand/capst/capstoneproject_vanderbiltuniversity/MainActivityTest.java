@@ -15,14 +15,27 @@ import android.widget.Spinner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
+import static org.apache.tools.ant.dispatch.DispatchUtils.execute;
+import static org.hamcrest.CoreMatchers.isA;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Created by Sudeep.Pandey on 1/22/2018.
@@ -32,14 +45,19 @@ import static org.junit.Assert.assertEquals;
 //@Config(constants = BuildConfig.class)
 public class MainActivityTest {
 
+    //@Mock
+    //WebService ws;
+
     private Activity activity;
     BroadcastReceiver mReceiver;
+    //WebService ws;
 
-    //@Before
-    //public void setUp() throws Exception{
+    @Before
+    public void setUp() throws Exception{
 
       //  activity= Robolectric.buildActivity(MainActivity.class).create().get();
-    //}
+        ///ws = new WebService();
+    }
     @Test
     public void onCreateLifeCyclePhaseTest() throws Exception{
 
@@ -95,21 +113,65 @@ public class MainActivityTest {
 
     }
 
-    //@Test
-    //public void onStartStateTest() throws Exception{
-        //activity=Robolectric.buildActivity(MainActivity.class).start().get();
+    @Test
+    public void onStartStateTest() throws Exception{
+       mockBoundLocalService();
+       activity=Robolectric.buildActivity(MainActivity.class).start().get();
+        //mockBoundLocalService();
+        assertTrue(activity!=null);
+    }
 
-        //assertTrue(activity!=null);
-    //}
-
-   /* @Test
+    @Test
     public void button_Find_PerformClickWorks() throws Exception{
 
-        activity=Robolectric.buildActivity(MainActivity.class).create().resume().visible().get();
-        activity.findViewById(R.id.button).performClick();
-        assertTrue(activity.findViewById(R.id.button).isEnabled());
-        //assertTrue(activity.findViewById(R.id.button2).isEnabled());
+        mockBoundLocalService();
+        //Spinner mySpinner=(Spinner) activity.findViewById(R.id.spinner);
+        //assertTrue(mySpinner.getCount()!=0);
 
-    }*/
+        //when(ws.execute(anyS);)
+        activity=Robolectric.buildActivity(MainActivity.class).create().start().resume().visible().get();
+
+        Spinner mySpinner=(Spinner) activity.findViewById(R.id.spinner);
+        assertTrue(mySpinner.getCount()!=0);
+        //activity.findViewById(R.id.button).performClick();
+        assertTrue(activity.findViewById(R.id.button).isEnabled());
+        assertFalse(activity.findViewById(R.id.button2).isEnabled());
+
+        assertTrue(activity.findViewById(R.id.button).isClickable());
+        //when(mock(WebService.class).execute(anyString(),anyString())).thenReturn(new Void()));
+        //doNothing().when(mock(WebService.class)).execute(anyString(), anyString());
+        Mockito.doCallRealMethod().when(mock(WebService.class)).execute(anyString(), anyString());
+        //when(mock(WebService.class)).execute(anyString(), anyString()).then(activity.sendBroadcast(new Intent("check")));
+        activity.findViewById(R.id.button).performClick();
+        assertFalse(activity.findViewById(R.id.button2).isEnabled());
+
+    }
+
+   @Test
+   public void onPauseLifecycleMethodUnregistersReceiver() throws Exception{
+
+       activity=Robolectric.buildActivity(MainActivity.class).create().resume().visible().pause().get();
+       activity.sendBroadcast(new Intent("capstone.project.action.PERSIST_COMPLETE"));
+       assertFalse(activity.findViewById(R.id.button2).isEnabled());
+
+   }
+
+
+
+
+   private void mockBoundLocalService(){
+       WebService.LocalBinder stubBinder = mock(WebService.LocalBinder.class);
+       //WebService.LocalBinder stubBinder = mock();
+       //when(stubBinder.getService()).thenReturn(mock(WebService.class));
+       when(stubBinder.getService()).thenReturn(mock(WebService.class));
+       //WebService spy=Mockito.spy(ws);
+       //Mockito.doNothing().when(spy).execute(anyString(),anyString());
+
+       //when(ws.execute(anyString(),anyString())).thenReturn(Void value);
+       //when(stubBinder.getService()).thenReturn(ws);
+       shadowOf(RuntimeEnvironment.application).setComponentNameAndServiceForBindService(new ComponentName("com.vand.capst.capstoneproject_vanderbiltuniversity","WebService"), stubBinder);
+      //new ShadowApplication().setComponentNameAndServiceForBindService(new ComponentName("com.vand.capst.capstoneproject_vanderbiltuniversity","WebService"), stubBinder);
+       //.setComponentNameAndServiceForBindService(new ComponentName("com.vand.capst.capstoneproject_vanderbiltuniversity","WebService"), stubBinder);
+   }
 
 }
