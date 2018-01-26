@@ -53,7 +53,7 @@ public class ContentProviderTest {
 
     @Test
     public void onCreateLifecycleStageTest() throws Exception{
-        //provider.onCreate();
+        provider.onCreate();
         assertNotNull(provider);
         assertEquals(new DBHelper(provider.getContext()).getDatabaseName(),"google_place_db");
         //assertEquals(Shadows.shadowOf(new SQLiteDatabase()).getpath());
@@ -69,6 +69,8 @@ public class ContentProviderTest {
 
     @Test
     public void insertWorksCorrectly() throws Exception{
+
+
 
     }
 }
