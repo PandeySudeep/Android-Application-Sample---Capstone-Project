@@ -100,10 +100,10 @@ public class ContentProviderTest {
         cvsArray[0]=cVals;
         cvsArray[1]=cVals2;
 
-        provider.onCreate();
-        assertEquals(new DBHelper(provider.getContext()).getDatabaseName(),"google_place_db");
+        //provider.onCreate();
+        //assertEquals(new DBHelper(provider.getContext()).getDatabaseName(),"google_place_db");
         //assertEquals(provider.getContext(),null);
-        new DBHelper(RuntimeEnvironment.application);
+       // new DBHelper(RuntimeEnvironment.application);
         Uri uri = LocationContract.LocationEntry.CONTENT_URI;
        //int check = provider.bulkInsert(Uri.parse("content://vand.capst.myprovider/location_table/1"),cvsArray);
         int check = provider.bulkInsert(uri,cvsArray);
