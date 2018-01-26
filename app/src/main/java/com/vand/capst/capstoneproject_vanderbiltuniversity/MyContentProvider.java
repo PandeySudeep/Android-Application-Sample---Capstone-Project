@@ -109,7 +109,9 @@ public class MyContentProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri,
                       ContentValues cvs) {
-        Uri returnUri;
+
+        throw new UnsupportedOperationException("Not yet implemented");
+        //Uri returnUri;
 
         //printCharacters("inserting", cvs, uri);
 
@@ -117,23 +119,23 @@ public class MyContentProvider extends ContentProvider {
         // code for the matched node (added using addURI), or -1 if
         // there is no matched node.  If there's a match insert a new
         // row.
-        switch (sUriMatcher.match(uri)) {
-            case LOCATIONS:
-                returnUri = insertLocations(uri,
-                        cvs);
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown uri: "
-                        + uri);
-        }
+        //switch (sUriMatcher.match(uri)) {
+           // case LOCATIONS:
+                //returnUri = insertLocations(uri,
+                        //cvs);
+                //break;
+            //default:
+                //throw new UnsupportedOperationException("Unknown uri: "
+                        //+ uri);
+        //}
 
         // Notifies registered observers that a row was inserted.
-        mContext.getContentResolver().notifyChange(uri,
-                null);
-        return returnUri;
+       // mContext.getContentResolver().notifyChange(uri,
+               // null);
+        //return returnUri;
     }
 
-    private Uri insertLocations(Uri uri,
+   /* private Uri insertLocations(Uri uri,
                                  ContentValues cvs) {
         final SQLiteDatabase db =
                 persistHelper.getWritableDatabase();
@@ -150,7 +152,7 @@ public class MyContentProvider extends ContentProvider {
             throw new android.database.SQLException
                     ("Failed to insert row into "
                             + uri);
-    }
+    }*/
 
 
     /**
@@ -240,8 +242,8 @@ public class MyContentProvider extends ContentProvider {
     }
 
     void printLocations(String operation,
-                         ContentValues cvs,
-                         Uri uri) {
+                        ContentValues cvs,
+                        Uri uri) {
         Log.d(TAG, operation + " on " + uri);
         for (String key : cvs.keySet()) {
             Log.d(TAG, key + " " + cvs.get(key));
