@@ -22,7 +22,7 @@ import android.widget.TextView;
  * Created by Sudeep.Pandey on 1/23/2018.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants=BuildConfig.class)
+//@Config(constants=BuildConfig.class)
 public class CapstoneAdapterTest {
 
     CapstoneAdapter adapter;

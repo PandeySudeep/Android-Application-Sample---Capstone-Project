@@ -38,6 +38,7 @@ public class MainActivityInstrumentationTest {
         Intent serviceIntent =
                 new Intent(InstrumentationRegistry.getTargetContext(), WebService.class);
 
+
         // Data can be passed to the service via the Intent.
         //serviceIntent.putExtra(LocalService.SEED_KEY, 42L);
 
