@@ -17,6 +17,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
 import android.net.Uri;
@@ -75,16 +76,12 @@ public class ContentProviderTest {
         //assertEquals(str,"caps.android.cursor.item/vand.capst.myprovider/location_table");
     }
 
-    @Test
-    public void insertWorksCorrectly() throws Exception{
+    @Test(expected = UnsupportedOperationException.class)
+    public void insertThrowsException() throws Exception{
 
-        ContentValues cVals = new ContentValues();
-        cVals.put("place_name","Cranberry");
-        cVals.put("place_type","City");
+        Uri uri = LocationContract.LocationEntry.CONTENT_URI;
+        provider.insert(uri,new ContentValues());
 
-        provider.onCreate();
-        new DBHelper(provider.getContext());
-        provider.insert(Uri.parse("content://vand.capst.myprovider/location_table/1"),cVals);
 
     }
 
@@ -120,6 +117,27 @@ public class ContentProviderTest {
     public void deleteWorksCorrectly() throws Exception{
 
         int del = provider.delete(Uri.parse("content://vand.capst.myprovider/location_table/1"),"place_name",new String[]{"test"});
+        //assertEquals(del,0);
+
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void updateWorksCorrectly() throws Exception{
+
+        Uri uri = LocationContract.LocationEntry.CONTENT_URI;
+        provider.update(uri,new ContentValues(),"place_name",new String[]{"Cranberry"});
+        //int del = provider.delete(Uri.parse("content://vand.capst.myprovider/location_table/1"),"place_name",new String[]{"test"});
+        //assertEquals(del,0);
+
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void queryThrowsException() throws Exception{
+
+        Uri uri = LocationContract.LocationEntry.CONTENT_URI;
+        provider.query(uri,null,"place_name",new String[]{"Cranberry"},"DESC");
+
+        //int del = provider.delete(Uri.parse("content://vand.capst.myprovider/location_table/1"),"place_name",new String[]{"test"});
         //assertEquals(del,0);
 
     }
