@@ -22,10 +22,11 @@ import static org.junit.Assert.assertTrue;
  * Created by Sudeep.Pandey on 1/22/2018.
  */
 @RunWith(AndroidJUnit4.class)
-public class MainActivityInstrumentationTest {
+public class WebServiceTest {
 
     @Rule
     public final ServiceTestRule mServiceRule = new ServiceTestRule();
+
 
     //@Rule
    // public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
@@ -52,6 +53,7 @@ public class MainActivityInstrumentationTest {
         //assertNotNull(service.execute(anyString(),anyString());, is(any(Integer.class)));
         service.execute("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.40,-70.32&radius=1000&type=hospital&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA","hospital");
         //assertTrue(MainActivity.findViewById(R.id.button2).isEnabled());
+        ///assertTrue(mActivityRule.getActivity().findViewById(R.id.button2).isEnabled());
 
         //onView(withId(R.id.button2)).check(matches(isEnabled()));
     }
