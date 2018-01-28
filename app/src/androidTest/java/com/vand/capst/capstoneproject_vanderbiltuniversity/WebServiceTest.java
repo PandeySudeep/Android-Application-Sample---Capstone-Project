@@ -1,6 +1,9 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
@@ -24,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class WebServiceTest {
 
+    //private boolean receivedBroadcast = false;
     @Rule
     public final ServiceTestRule mServiceRule = new ServiceTestRule();
 
@@ -35,6 +39,7 @@ public class WebServiceTest {
     @Test
     public void testWithBoundService() throws Exception{
 
+      //  InstrumentationRegistry.getContext().registerReceiver(testReceiver,new IntentFilter("capstone.project.action.PERSIST_COMPLETE"));
         // Create the service Intent.
         Intent serviceIntent =
                 new Intent(InstrumentationRegistry.getTargetContext(), WebService.class);
@@ -56,5 +61,12 @@ public class WebServiceTest {
         ///assertTrue(mActivityRule.getActivity().findViewById(R.id.button2).isEnabled());
 
         //onView(withId(R.id.button2)).check(matches(isEnabled()));
+        //assertTrue(receivedBroadcast);
     }
+    //private BroadcastReceiver testReceiver = new BroadcastReceiver() {
+      //  @Override
+        //public void onReceive(Context context, Intent intent) {
+          //  receivedBroadcast = true;
+        //}
+    //};
 }
