@@ -42,8 +42,8 @@ public class DBHelperTest {
     Context ctx = RuntimeEnvironment.application;
 
     //public static boolean onCreateCalled=false;
-   // public static boolean onUpgradeCalled=false;
-   // public static boolean onOpenCalled=false;
+    // public static boolean onUpgradeCalled=false;
+    // public static boolean onOpenCalled=false;
 
 
     @Before
@@ -77,10 +77,10 @@ public class DBHelperTest {
         SQLiteDatabase database = helper.getReadableDatabase();
 
         //assertSubsequentDB(database, helper);
-         //assertDatabaseOpened(database, helper);
+        //assertDatabaseOpened(database, helper);
         assertNotNull(database);
         assertTrue(database.isOpen());
-         //assertFalse(helper.onCreateCalled);
+        //assertFalse(helper.onCreateCalled);
     }
 
     @Test
@@ -193,20 +193,20 @@ public class DBHelperTest {
 
 
     //private static void assertInitialDB(SQLiteDatabase database, TestOpenHelper helper) {
-       // assertDatabaseOpened(database, helper);
-       // assertTrue(helper.onCreateCalled);
+    // assertDatabaseOpened(database, helper);
+    // assertTrue(helper.onCreateCalled);
     //}
 
-   // private static void assertSubsequentDB(SQLiteDatabase database, DBHelper helper) {
-       // assertDatabaseOpened(database, helper);
-        //assertFalse(helper.onCreateCalled);
+    // private static void assertSubsequentDB(SQLiteDatabase database, DBHelper helper) {
+    // assertDatabaseOpened(database, helper);
+    //assertFalse(helper.onCreateCalled);
     //}
 
     //private static void assertDatabaseOpened(SQLiteDatabase database, DBHelper helper) {
-        //assertNotNull(database);
-        //assertTrue(database.isOpen());
-        //assertTrue(helper.onOpenCalled);
-       // assertFalse(helper.onUpgradeCalled);
+    //assertNotNull(database);
+    //assertTrue(database.isOpen());
+    //assertTrue(helper.onOpenCalled);
+    // assertFalse(helper.onUpgradeCalled);
     //}
 
    /* private static class TestOpenHelper extends DBHelper {

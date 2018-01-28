@@ -70,33 +70,15 @@ public class WebServiceTest {
    @Test
     public void onCreateReturnsHandlerThread() throws Exception{
 
-       service.onCreate();
+       //service.onCreate();
        //assertTrue(Thread.activeCount()==4);
        assertTrue(service !=null);
 
    }
 
-   @Test
-    public void checkLocalBinderWorksProperly() throws Exception{
 
-       //ShadowBinder bdr = Shadows.shadowOf(new service.LocalBinder());
-       //service.  = new WebService.LocalBinder();
 
-   }
 
-   @Test
-    public void onDestroyDestroysService() throws Exception{
-
-       //service.onCreate();
-       //assertTrue(service!=null);
-       //service.onDestroy();
-       //service.unbindService(conn);
-      //assertTrue(service!=null);
-      // boolean bl = service.onUnbind(new Intent());
-       //service.onDestroy();
-       //assertFalse(bl);
-
-   }
 
 
 
