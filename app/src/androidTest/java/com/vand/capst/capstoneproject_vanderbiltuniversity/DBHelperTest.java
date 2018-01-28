@@ -1,8 +1,6 @@
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;
 import android.support.test.runner.AndroidJUnit4;
@@ -13,9 +11,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 /**
  * Created by Sudeep.Pandey on 1/27/2018.
+ * The following class tests if SQLiteOpenHelper gets instantiated successfully with google_place_db database in place.
  */
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -25,29 +24,23 @@ public class DBHelperTest {
     private Context instrumentationCtx;
 
     @Before
+    //Get the context
     public void setup() {
         instrumentationCtx = InstrumentationRegistry.getContext();
     }
 
     @After
+    //Close SQLiteOpenHelper after each test.
     public void tearDown(){
         helper.close();
 
     }
 
     @Test
+    //DBHelper should be associated with "google_place_db" database.
     public void testSQLiteOpenHelperInitiation() throws Exception{
         helper = new DBHelper(instrumentationCtx);
         assertEquals(helper.getDatabaseName(),"google_place_db");
     }
 
-   // @Test
-    //public void onUpgradeImpliesVersionChange() throws Exception {
-      //  helper = new DBHelper(instrumentationCtx);
-        //SQLiteDatabase db = helper.getWritableDatabase();
-        //helper.onUpgrade(db, 1, 2);
-        //assertTrue(db.getVersion()==1);
-        //Cursor cursor = db.rawQuery("Select * from location_table", null);
-        //assertTrue(cursor.getCount() == 0);
-    //}
 }

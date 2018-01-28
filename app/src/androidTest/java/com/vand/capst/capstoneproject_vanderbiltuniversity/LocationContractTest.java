@@ -11,6 +11,9 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Sudeep.Pandey on 1/27/2018.
+ *
+ * LocationContract is utilized by Content Provider for database work. The following test confirms that 'buildUri'
+ * method operates correctly.
  */
 @RunWith(AndroidJUnit4.class)
 public class LocationContractTest {
