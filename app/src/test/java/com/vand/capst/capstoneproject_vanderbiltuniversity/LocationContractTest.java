@@ -7,12 +7,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import java.net.URI;
-
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Sudeep.Pandey on 1/25/2018.
+ *
+ * The test below examines whether LocationContract class works correctly by successfully building the desired Uri.
  */
 @RunWith(RobolectricTestRunner.class)
 public class LocationContractTest {

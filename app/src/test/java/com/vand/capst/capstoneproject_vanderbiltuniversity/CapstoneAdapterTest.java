@@ -1,4 +1,3 @@
-
 package com.vand.capst.capstoneproject_vanderbiltuniversity;
 
 import android.support.v7.widget.CardView;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.RoboLayoutInflater;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -21,9 +19,11 @@ import android.widget.TextView;
 
 /**
  * Created by Sudeep.Pandey on 1/23/2018.
+ *
+ * The following class includes test cases for CapstoneAdapter. This adapter was used to generate the RecyclerView that holds all
+ * the card views with data retrieved from Google Web Service.
  */
 @RunWith(RobolectricTestRunner.class)
-//@Config(constants=BuildConfig.class)
 public class CapstoneAdapterTest {
 
     CapstoneAdapter adapter;

@@ -10,13 +10,13 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import android.support.v7.widget.StaggeredGridLayoutManager;
-
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by Sudeep.Pandey on 1/25/2018.
+ *
+ * The below test verifies that RecycleView object gets instantiated when ResultView activity
+ * gets created via appropriate Intent object.
  */
 @RunWith(RobolectricTestRunner.class)
 public class ResultViewTest {
@@ -26,23 +26,11 @@ public class ResultViewTest {
     @Test
     public void checkOnCreateLifeCycleStage() throws Exception{
 
-        //Intent intent = new Intent()
         Intent intent = new Intent(RuntimeEnvironment.application,ResultView.class);
         intent.putExtra("responseArray",new String[]{"one","two","three","four","five"});
 
         activity = Robolectric.buildActivity(ResultView.class,intent).create().resume().visible().get();
         RecyclerView recyclerView = activity.findViewById(R.id.recyclerView);
         assertNotNull(recyclerView);
-
-       // Webresponse[] responses = new Webresponse[]{new Webresponse("one"),new Webresponse("two"),new Webresponse("three"),new Webresponse("four"),new Webresponse("five")};
-        //CapstoneAdapter adapter = new CapstoneAdapter(responses);
-
-        //recyclerView.setAdapter(adapter);
-        //StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        //recyclerView.setLayoutManager(manager);
-
-        //assertNotNull(recyclerView);
-
     }
-
 }
