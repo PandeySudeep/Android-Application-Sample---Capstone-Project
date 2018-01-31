@@ -111,49 +111,8 @@ public class MyContentProvider extends ContentProvider {
                       ContentValues cvs) {
 
         throw new UnsupportedOperationException("Not yet implemented");
-        //Uri returnUri;
 
-        //printCharacters("inserting", cvs, uri);
-
-        // Try to match against the path in a url.  It returns the
-        // code for the matched node (added using addURI), or -1 if
-        // there is no matched node.  If there's a match insert a new
-        // row.
-        //switch (sUriMatcher.match(uri)) {
-           // case LOCATIONS:
-                //returnUri = insertLocations(uri,
-                        //cvs);
-                //break;
-            //default:
-                //throw new UnsupportedOperationException("Unknown uri: "
-                        //+ uri);
-        //}
-
-        // Notifies registered observers that a row was inserted.
-       // mContext.getContentResolver().notifyChange(uri,
-               // null);
-        //return returnUri;
     }
-
-   /* private Uri insertLocations(Uri uri,
-                                 ContentValues cvs) {
-        final SQLiteDatabase db =
-                persistHelper.getWritableDatabase();
-
-        long id =
-                db.insert(LocationContract.LocationEntry.TABLE_NAME,
-                        null,
-                        cvs);
-
-        // Check if a new row is inserted or not.
-        if (id > 0)
-            return LocationContract.LocationEntry.buildUri(id);
-        else
-            throw new android.database.SQLException
-                    ("Failed to insert row into "
-                            + uri);
-    }*/
-
 
     /**
      * Method that handles bulk insert requests.
@@ -161,10 +120,6 @@ public class MyContentProvider extends ContentProvider {
     @Override
     public int bulkInsert( Uri uri,
                           ContentValues[] cvsArray) {
-
-        for (ContentValues cvs : cvsArray)
-
-            printLocations("bulk inserting", cvs, uri);
 
         // Try to match against the path in a url.  It returns the
         // code for the matched node (added using addURI), or -1 if
@@ -234,19 +189,9 @@ public class MyContentProvider extends ContentProvider {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    void printLocations(String operation,
-                        ContentValues cvs,
-                        Uri uri) {
-        Log.d(TAG, operation + " on " + uri);
-        for (String key : cvs.keySet()) {
-            Log.d(TAG, key + " " + cvs.get(key));
-        }
     }
 }

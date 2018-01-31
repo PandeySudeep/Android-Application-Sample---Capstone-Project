@@ -38,6 +38,7 @@ task _answerZip(type:Zip) {
     include 'build.gradle'
     include 'gradle.properties'
     include 'gradlew'
+    include 'jacoco.gradle'
     include 'gradlew.bat'
     include 'settings.gradle'
     include 'gradle/**'

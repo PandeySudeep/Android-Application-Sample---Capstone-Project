@@ -4,9 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.File;
-
-
 public class DBHelper
 extends SQLiteOpenHelper
 
@@ -19,8 +16,6 @@ extends SQLiteOpenHelper
          * change.
          */
         private static int DATABASE_VERSION = 1;
-
-
 
         /**
          * SQL statement used to create the table.

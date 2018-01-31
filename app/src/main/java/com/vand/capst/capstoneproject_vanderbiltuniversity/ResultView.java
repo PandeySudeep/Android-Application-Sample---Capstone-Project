@@ -12,8 +12,6 @@ public class ResultView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_view);
 
-
-
         String[] myResponses = getIntent().getStringArrayExtra("responseArray");
         Webresponse[] responseObjects = new Webresponse[myResponses.length];
         for(int i=0;i<myResponses.length;i++){

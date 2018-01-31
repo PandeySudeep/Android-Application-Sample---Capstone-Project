@@ -11,7 +11,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Process;
-//import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;

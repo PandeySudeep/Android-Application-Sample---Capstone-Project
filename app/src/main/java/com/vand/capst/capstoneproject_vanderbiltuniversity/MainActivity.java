@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.IBinder;
-//import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,7 +40,6 @@ public class MainActivity extends Activity {
          * Get UI elements initialized with spinners displaying options and buttons.
          */
         initializeViews();
-        //Log.d(TAG, "onCreate(): MainActivity initiated");
 
         /**
          * set up button which when clicked uses bound service that makes Google API Web Service call.
@@ -52,12 +50,10 @@ public class MainActivity extends Activity {
                 if (mBound) {
                     setLatitude();
                     setLongitude();
-                    //Log.d(TAG, "web service called: latitude: "+latitude+"longitude: "+longitude+".");
                     String requestUrl="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=1000&type="+getInterest()+"&key=AIzaSyDo7-hsZ6-c5YaxfB8R906UFjkOE20K3yA";
                     button.setEnabled(false);
                     button.setText("thank you..");
                     ws.execute(requestUrl,getInterest());
-                    //Log.d(TAG, "Find button clicked: Web Service request made");
                 }
             }
         });
@@ -72,14 +68,12 @@ public class MainActivity extends Activity {
                  */
                 Button viewButton = findViewById(R.id.button2);
                 viewButton.setEnabled(false);
-                //Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: database cursor desired.");
                 List<String> collect = new ArrayList<String>();
                 SQLiteDatabase dbase = new DBHelper(MainActivity.this).getWritableDatabase();
                 Cursor resultSet = dbase.rawQuery("Select place_name from location_table",null);
                 while(resultSet.moveToNext()){
                     collect.add(resultSet.getString(0));
                 }
-                //Log.d(TAG, "AsyncTask(GetWebResponse).doInBackground: data from database achieved.");
                 dbase.close();
                 String[] responseArray = new String[collect.size()];
                 collect.toArray(responseArray);
@@ -97,7 +91,6 @@ public class MainActivity extends Activity {
         // Bind to Service in the same process
         Intent intent = new Intent(this, WebService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        //Log.d(TAG, "onStart(): bindService() called");
     }
 
     @Override
@@ -122,7 +115,6 @@ public class MainActivity extends Activity {
         };
         //registering broadcast receiver
         this.registerReceiver(this.mReceiver, intentFilter);
-        //Log.d(TAG, "onResume(): Registered Broadcast Receiver");
     }
 
     @Override
@@ -130,7 +122,6 @@ public class MainActivity extends Activity {
         super.onPause();
         //unregister broadcast receiver
         this.unregisterReceiver(this.mReceiver);
-        //Log.d(TAG, "onPause(): Unregistered Broadcast Receiver");
     }
     @Override
     protected void onStop() {
@@ -138,7 +129,6 @@ public class MainActivity extends Activity {
         //unbinding from the bound service
         unbindService(mConnection);
         mBound = false;
-        //Log.d(TAG, "onStop(): Service Unbound");
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -150,7 +140,6 @@ public class MainActivity extends Activity {
             WebService.LocalBinder binder = (WebService.LocalBinder) b;
             ws = binder.getService();
             mBound = true;
-            //Log.d(TAG, "onStart(): Bound Service Connected");
         }
 
         @Override

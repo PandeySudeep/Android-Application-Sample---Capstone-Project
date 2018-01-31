@@ -6,6 +6,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * This class represent Adapter for RecyclerView that displays results retrieved from Web Service call.
+ * Constructor of this class takes a Java ARRAY of type Webresponse. Each individual Webresponse object
+ * is then displayed in a single Card View within the RecycleView.
+ * This adapter class binds the appropriate cardview to its corresponding RecyclerView.
+ */
 
 class CapstoneAdapter extends RecyclerView.Adapter<CapstoneAdapter.ViewHolder> {
 
