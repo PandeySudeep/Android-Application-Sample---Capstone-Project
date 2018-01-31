@@ -4,7 +4,8 @@ Application allows user to select one specific site among
 different popular sites (like statue of liberty, empire state, manhattan, etc.
 ) within the state of New York and then select one point of interest
 like restaurant, library, hospital etc. Application then uses Google
-Places API Web Service to locate specific institutions around the site.
+Places API Web Service to locate specific institutions around the site (within 1000 meters
+radius).
 
 ### Wireframe
 
