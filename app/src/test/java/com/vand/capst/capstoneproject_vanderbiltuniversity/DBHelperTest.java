@@ -45,6 +45,7 @@ public class DBHelperTest {
         helper.close();
     }
 
+    //checks if the SQLiteOpenHelper works correctly with database when instantiated.
     @Test
     public void testInitialGetReadableDatabase() throws Exception {
         SQLiteDatabase database = helper.getReadableDatabase();
@@ -53,6 +54,7 @@ public class DBHelperTest {
         assertTrue(database.getPath().contains("google_place_db"));
     }
 
+    //checks SQLiteOpenHelper when re-instantiated.
     @Test
     public void testSubsequentGetReadableDatabase() throws Exception {
         helper.getReadableDatabase();
@@ -63,6 +65,7 @@ public class DBHelperTest {
         assertTrue(database.isOpen());
     }
 
+    //checks onUpgrade() method if it is followed by database and table.
     @Test
     public void onUpgradeImpliesVersionChange() throws Exception{
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -71,6 +74,7 @@ public class DBHelperTest {
         assertTrue(cursor.getCount()==0);
     }
 
+    //verifies that multiple calls to getReadableDatabase() points to same instance of the SQLiteDatabase.
     @Test
     public void testSameDBInstanceSubsequentGetReadableDatabase() throws Exception {
         SQLiteDatabase db1 = helper.getReadableDatabase();
@@ -79,7 +83,8 @@ public class DBHelperTest {
         assertTrue(db1==db2);
     }
 
-    @Test
+  //verifies getWritableDatabase() opens the SQLiteDatabae.
+   @Test
     public void testInitialGetWritableDatabase() throws Exception {
         SQLiteDatabase database = helper.getWritableDatabase();
 
@@ -87,6 +92,7 @@ public class DBHelperTest {
         assertTrue(database.isOpen());
     }
 
+    //subsequent calls to getWritableDatabase()
     @Test
     public void testSubsequentGetWritableDatabase() throws Exception {
         helper.getWritableDatabase();
@@ -96,6 +102,7 @@ public class DBHelperTest {
         assertTrue(helper.getWritableDatabase().isOpen());
     }
 
+    //subsequent calls to getWritableDatabase() are associated with same instance of SQLiteDatabase.
     @Test
     public void testSameDBInstanceSubsequentGetWritableDatabase() throws Exception {
         SQLiteDatabase db1 = helper.getWritableDatabase();
@@ -104,6 +111,7 @@ public class DBHelperTest {
         assertTrue(db1==db2);
     }
 
+    //closing a SQLiteOpenHelper should close the database.
     @Test
     public void testClose() throws Exception {
         SQLiteDatabase database = helper.getWritableDatabase();
@@ -113,6 +121,7 @@ public class DBHelperTest {
         assertFalse(database.isOpen());
     }
 
+    //multiple SQLiteOpenHelper
     @Test
     public void testCloseMultipleDbs() throws Exception {
         DBHelper helper2 = new DBHelper(ctx);
@@ -147,6 +156,7 @@ public class DBHelperTest {
                 null, null, null).getCount(),(expectedVals));
     }
 
+    //insert operations on database tables.
     @Test
     public void testMultipleDbsPreserveData() throws Exception {
         final String TABLE_NAME1 = "fart", TABLE_NAME2 = "fart2";

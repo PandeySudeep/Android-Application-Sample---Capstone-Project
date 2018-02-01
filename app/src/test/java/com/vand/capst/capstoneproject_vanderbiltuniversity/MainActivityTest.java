@@ -42,6 +42,7 @@ public class MainActivityTest {
     private Activity activity;
     BroadcastReceiver mReceiver;
 
+    //onCreate() phase of the activity lifecycle - UI initialization test
     @Test
     public void onCreateLifeCyclePhaseTest() throws Exception{
 
@@ -64,6 +65,7 @@ public class MainActivityTest {
 
     }
 
+    //onResume() phase of the activity lifecycle - registering a receiver, sending broadcase and verifying the consequence.
     @Test
     public void onResumeLifeCyclePhaseTest() throws Exception{
 
@@ -91,6 +93,7 @@ public class MainActivityTest {
         assertTrue(activity.findViewById(R.id.button2).isEnabled());
     }
 
+    //mocking the bound service and verifying onStart() lifecycle phase.
     @Test
     public void onStartStateTest() throws Exception{
        mockBoundLocalService();
@@ -98,6 +101,7 @@ public class MainActivityTest {
         assertTrue(activity!=null);
     }
 
+    //mocking the bound service and performing UI operations
     @Test
     public void button_Find_PerformClickWorks() throws Exception{
 
@@ -118,6 +122,7 @@ public class MainActivityTest {
         assertFalse(activity.findViewById(R.id.button2).isEnabled());
     }
 
+    //unregistering the broadcast receiver during onPause() lifecycle phase.
    @Test
    public void onPauseLifecycleMethodUnregistersReceiver() throws Exception{
 
@@ -126,6 +131,7 @@ public class MainActivityTest {
        assertFalse(activity.findViewById(R.id.button2).isEnabled());
    }
 
+   //onStop() - activity persists.
     @Test
     public void onStopMethodRetainsActivity() throws Exception{
 

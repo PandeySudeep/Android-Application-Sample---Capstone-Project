@@ -41,12 +41,14 @@ public class CapstoneAdapterTest {
         rView.setLayoutManager(manager);
     }
 
+    //checks whether number of items(cardviews) is equal to size of array used as constructor parameter.
     @Test
     public void checkIfgetItemCountReturnsCorrectNumber() throws Exception{
         int itemCount = adapter.getItemCount();
         assertEquals(itemCount,2);
     }
 
+    //checks if ViewHolder of the recyclerview got successfully instantiated and it is associated with the correct cardview.
     @Test
     public void onCreateViewHolderShouldCreateCorrectViewHolder() throws Exception{
 
@@ -55,6 +57,7 @@ public class CapstoneAdapterTest {
         assertTrue(holder.getClass()==(new CapstoneAdapter.ViewHolder(cardView).getClass()));
     }
 
+    //checks if the cardviews in recyclerview display the correct data.
     @Test
     public void checkIfOnBindViewHolderGeneratesCorrectCardView() throws Exception{
 

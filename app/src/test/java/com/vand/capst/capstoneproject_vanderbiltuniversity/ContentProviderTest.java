@@ -32,6 +32,7 @@ public class ContentProviderTest {
         provider = Robolectric.setupContentProvider(MyContentProvider.class);
     }
 
+    //checks if content provider got instantiated correctly by verifying the accuracy of the database name.
     @Test
     public void onCreateLifecycleStageTest() throws Exception{
         provider.onCreate();
@@ -39,6 +40,7 @@ public class ContentProviderTest {
         assertEquals(new DBHelper(provider.getContext()).getDatabaseName(),"google_place_db");
     }
 
+    //checks if getType() method of the content provider works correctly.
     @Test
     public void getTypeWorksCorrectly() throws Exception{
 
@@ -46,6 +48,7 @@ public class ContentProviderTest {
         assertEquals(str,"caps.android.cursor.item/vand.capst.myprovider/location_table");
     }
 
+    //insert() method of the content provider wasn't implemented. So it should throw exception.
     @Test(expected = UnsupportedOperationException.class)
     public void insertThrowsException() throws Exception{
 
@@ -53,6 +56,7 @@ public class ContentProviderTest {
         provider.insert(uri,new ContentValues());
     }
 
+    //checks if bulkInsert() works correctly by supplying ContentValues array of size 2.
     @Test
     public void bulkInsertWorksCorrectly() throws Exception{
 
@@ -73,12 +77,14 @@ public class ContentProviderTest {
         assertEquals(check,2);
     }
 
+    //delete() should work correctly by throwing Exception.
     @Test(expected = UnsupportedOperationException.class)
     public void deleteWorksCorrectly() throws Exception{
 
         int del = provider.delete(Uri.parse("content://vand.capst.myprovider/location_table/1"),"place_name",new String[]{"test"});
     }
 
+    //update() method of contentprovider wasn't implemented. So it should throw Exception.
     @Test(expected = UnsupportedOperationException.class)
     public void updateWorksCorrectly() throws Exception{
 
@@ -86,6 +92,7 @@ public class ContentProviderTest {
         provider.update(uri,new ContentValues(),"place_name",new String[]{"Cranberry"});
     }
 
+    //query() method of content provider should throw Exception as it wasn't implemented.
     @Test(expected = UnsupportedOperationException.class)
     public void queryThrowsException() throws Exception{
 

@@ -23,6 +23,7 @@ public class ResultViewTest {
 
     private Activity activity;
 
+    //starting second activity with an intent - RecyclerView gets instantiated.
     @Test
     public void checkOnCreateLifeCycleStage() throws Exception{
 

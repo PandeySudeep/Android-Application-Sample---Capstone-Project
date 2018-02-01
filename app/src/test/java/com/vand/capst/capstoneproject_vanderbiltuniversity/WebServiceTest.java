@@ -28,6 +28,7 @@ public class WebServiceTest {
         service = Robolectric.setupService(WebService.class);
         }
 
+    //onBind() method should return IBinder.
    @Test
    public void onBindReturnsIBinder() throws Exception{
 
@@ -37,8 +38,9 @@ public class WebServiceTest {
        assertTrue(b instanceof WebService.LocalBinder);
    }
 
+   //service object instantiated..
    @Test
-    public void onCreateReturnsHandlerThread() throws Exception{
+    public void setUpServiceTest() throws Exception{
 
        assertTrue(service !=null);
    }
