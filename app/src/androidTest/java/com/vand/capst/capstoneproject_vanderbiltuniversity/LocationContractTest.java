@@ -25,6 +25,7 @@ public class LocationContractTest {
         contract  = new LocationContract();
     }
 
+    //buildUri() method of LocationContract should return correct Uri.
     @Test
     public void buildUriReturnsCorrectly() throws Exception{
 

@@ -31,6 +31,7 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
+    //Espresso test used to carry out UI activities to verify state changes.
     @Test
     public void checkInitialUIState(){
 
@@ -40,13 +41,6 @@ public class MainActivityTest {
         onView(withId(R.id.button2)).check(matches(not(isEnabled())));
 
         onView(withId(R.id.button)).perform(click());
-
-        //onView(withId(R.id.button)).check(matches(not(isEnabled())));
-        //onView(withId(R.id.button2)).check(matches(isEnabled()));
-
-        //onView(withId(R.id.button2)).check(matches(not(isEnabled())));
-        //onView(withId(R.id.button2)).perform(click());
-        //onView(withId(R.id.button2)).check(matches(isEnabled())));
 
     }
 }

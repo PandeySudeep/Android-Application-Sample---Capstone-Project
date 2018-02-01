@@ -20,6 +20,8 @@ public class WebServiceTest {
     @Rule
     public final ServiceTestRule mServiceRule = new ServiceTestRule();
 
+    //bound service should operate properly. It should return IBinder during onBind(), return its instance
+    //when getService() is called and execute() method should run.
     @Test
     public void testWithBoundService() throws Exception{
 
