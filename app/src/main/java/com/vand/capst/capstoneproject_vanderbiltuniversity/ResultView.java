@@ -7,6 +7,13 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 
 public class ResultView extends Activity {
 
+    /**
+     * This activity will be instantiated via Intent from the MainActivity. The intent will
+     * carry JAVA Array which will then be passed as parameter to the RecyclerView adapter.
+     * Once the adapter is set to the recyclerview, cardviews are then displayed in the
+     * recyclerview.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +31,7 @@ public class ResultView extends Activity {
 
         recyclerView.setAdapter(adapter);
 
+        //Layout Manager is mandatory for recyclerview.
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
     }

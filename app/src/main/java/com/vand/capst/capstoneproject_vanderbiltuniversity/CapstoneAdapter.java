@@ -21,6 +21,7 @@ class CapstoneAdapter extends RecyclerView.Adapter<CapstoneAdapter.ViewHolder> {
         this.responses=responsecollection;
     }
 
+    //a ViewHolder object is mandatory for RecyclerView. It takes CardView as constructor parameter.
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private CardView cardView;
@@ -31,12 +32,13 @@ class CapstoneAdapter extends RecyclerView.Adapter<CapstoneAdapter.ViewHolder> {
         }
     }
 
+    //total number of items represents total number of cardviews in the recyclerview.
     @Override
     public int getItemCount(){
         return responses.length;
     }
 
-
+    //this method associates specific cardview via inflation and instantiates the ViewHolder object.
     @Override
     public CapstoneAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
@@ -45,12 +47,12 @@ class CapstoneAdapter extends RecyclerView.Adapter<CapstoneAdapter.ViewHolder> {
 
     }
 
+    //the data from the supplied JAVA Array is then spread throughout cardviews in RecyclerView.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position){
 
         final CardView cardView = holder.cardView;
         TextView textView = (TextView)cardView.findViewById(R.id.web_response);
         textView.setText(responses[position].getName());
-
     }
 }

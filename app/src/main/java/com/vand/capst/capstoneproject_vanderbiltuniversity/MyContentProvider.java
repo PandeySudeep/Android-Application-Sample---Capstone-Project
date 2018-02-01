@@ -177,18 +177,21 @@ public class MyContentProvider extends ContentProvider {
         return returnCount;
     }
 
+    //we won't implement this method since we won't need it.
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // Implement this to handle requests to delete one or more rows.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    //we won't implement this method since we won't need it.
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    //we won't implement this method since we won't need it.
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {

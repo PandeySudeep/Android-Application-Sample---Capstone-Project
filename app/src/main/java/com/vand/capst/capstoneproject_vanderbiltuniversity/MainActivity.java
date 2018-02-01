@@ -212,6 +212,7 @@ public class MainActivity extends Activity {
         }
     }
 
+    //to get specific longitude based on user selection of the site of interest.
     private void setLongitude(){
 
         if(getSite().equals("Statue of Liberty")){
