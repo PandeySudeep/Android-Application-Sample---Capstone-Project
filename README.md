@@ -24,7 +24,7 @@ longitude around which to retrieve information), (iii) radius (the distance (in 
 within which to return place results.)
 
 ### Application Structure
-
+Click on the image below to enlarge..
 ![alt text](images/uml.PNG "Wireframe 1")
 
 ### Structure Details
